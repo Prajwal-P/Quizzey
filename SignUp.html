@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+		rel="stylesheet"
+	/>
+    <link rel="stylesheet" href="SignUp.css">
+    <title>Quizzey</title>
+</head>
+<body>
+    <div class="signUpCard">
+        <h1>Sign Up</h1>
+        <form>
+            <input class="name" type="text" style="margin-right: 15px;" placeholder="First Name" required>
+            <input class="name" type="text" placeholder="Last Name" required>
+            <input class="rem_textbox" type="email" placeholder="Email" required>
+            <input class="radio_btn" type="radio" id="teacher" name="userType" required>
+            <label for="teacher" style="margin-right: 100px;">Teacher</label>
+            <input class="radio_btn" type="radio" id="student" name="userType">
+            <label for="student">Student</label>
+            <input class="rem_textbox" type="password" placeholder="Create Password" required>
+            <input class="rem_textbox" type="password" placeholder="Confirm Password" required>
+            <button type="submit">SIGN UP</button>
+        </form>
+        <span>Already have an account ?</span>
+        <a class="h-center" href="./signIn.html">Log In</a>
+    </div>
+</body>
+</html>
