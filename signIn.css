@@ -18,10 +18,9 @@ body {
 }
 .signInCard h1 {
 	font-weight: 900;
-	/* font-size: 48px; */
 	color: #7e57c2;
 	text-align: center;
-	margin-bottom: 64px;
+	margin: 0 auto 64px;
 }
 .signInCard form {
 	/* width: 80%; */
