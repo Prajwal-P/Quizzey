@@ -65,7 +65,7 @@ body {
 
 .signUpCard button {
 	display: block;
-	margin: 48px auto 64px;
+	margin: 16px auto 32px;
 	background-color: #7e57c2;
 	border: 0;
 	width: 250px;
@@ -94,7 +94,7 @@ body {
 	color: #7e57c2;
 	cursor: pointer;
 	display: block;
-	margin-bottom: 30px;
+	margin-bottom: 64px;
 	text-align: right;
 	text-decoration: none;
 }
