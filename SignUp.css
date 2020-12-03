@@ -23,7 +23,8 @@ body {
     font-size: 2em;
     text-align: center;
     color: #7E57C2;
-    margin-bottom: 53px;
+	margin-bottom: 64px;
+	margin-top: 64px;
 }
 
 .signUpCard form {
@@ -64,10 +65,10 @@ body {
 
 .signUpCard button {
 	display: block;
-	margin: 0 auto;
+	margin: 48px auto 64px;
 	background-color: #7e57c2;
 	border: 0;
-	width: 200px;
+	width: 250px;
 	padding: 6px;
 	border-radius: 8px;
 	font-family: 'Roboto', sans-serif;
@@ -76,8 +77,6 @@ body {
 	font-size: 20px;
 	color: #ffffff;
 	cursor: pointer;
-	margin-bottom: 35px;
-	margin-top: 15px;
 }
 
 .signUpCard button:hover {
