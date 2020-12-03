@@ -6,7 +6,7 @@ body {
 }
 
 .signUpCard {
-    width: 600px;
+    width: 500px;
     /* height: 700px; */
     background: #FFFFFF;
     /* Shadow 1 */
@@ -29,7 +29,7 @@ body {
 
 .signUpCard form {
 	display: block;
-	margin: 0 100px;
+	margin: 0 50px;
 }
 
 .name {
