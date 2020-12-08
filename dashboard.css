@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+}
+
+.nav_bar {
+    left: 0px;
+    top: 0px;
+    background-color: #7E57C2;
+    padding: 10px;
+}
+
+.nav_bar h2:nth-child(1) {
+    margin: 0px;
+    height: 30px;
+    color: #FFFFFF;
+    display: inline;
+}
+
+.user_name {
+    float: right;
+}
+
+.user_name h2 {
+    height: 30px;
+}
+
+
+.user_name img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float: right;
+    margin-left: 10px;
+}
+
