@@ -8,19 +8,31 @@
 		href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
 		rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="dashboard.css">
     <title>Quizzey</title>
 </head>
 <body>
     <div class="nav_bar">
         <h2>QUIZZEY</h2>
-        <div class="user_name">
+        <div class="user_name" onclick="toggle_dropdown()">
             <h2>FIRST_NAME</h2>
             <img src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg" alt="Profile Picture">
         </div>
-        <div>
-            <!-- drop down -->
+        <div class="dd_wrapper close" id="dropdown">
+            <button>Classroom</button>
+            <button>Profile</button>
+            <hr>
+            <button>Sign Out</button>
         </div>
     </div>
+    <div class="root">
+        <div class="add_class">
+            <span class="material-icons">add_circle_outline</span>
+            <h1>ADD CLASS</h1>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
 </body>
 </html>
