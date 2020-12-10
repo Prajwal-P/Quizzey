@@ -36,13 +36,21 @@ let all_classrooms = [
 	}
 ]
 
-// function cls_template(cls) {
-// 	return `
-// 	<div class="new_class">
-// 		<h1>${}</h1>
-// 	`
-// }
+function cls_template(cls) {
+	return `
+		<div class="class_card">
+			<h2>${cls.name}</h2>
+			<hr />
+			<span>
+				${cls.description}
+			</span>
+		</div>
+	`
+}
 
+document.querySelector('.class_card_wrapper').innerHTML = `
+	${all_classrooms.map(cls_template).join('')}
+`
 
 let menu_visible = false;
 function toggle_dropdown() {

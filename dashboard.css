@@ -78,39 +78,31 @@ body {
 }
 
 .root {
-	margin: 100px 95px 0px;
+	margin: 100px 25px 100px;
 }
 
-.add_class {
+.class_card_wrapper {
 	display: inline-block;
-	width: 350px;
-	height: 300px;
-	border-radius: 8px;
-	background-color: #ffffff;
-	cursor: pointer;
-	margin: 0 100px 100px 0;
-}
-
-.add_class span {
-	font-size: 200px;
-	display: block;
-	margin: 25px auto 12px;
-	text-align: center;
-	color: #e5e5e5;
-}
-
-.add_class h1 {
-	text-align: center;
-	color: #e5e5e5;
-	margin: 0;
+	margin: 0 auto;
 }
 
 .class_card {
 	display: inline-block;
-	width: 350px;
-	height: 300px;
+	width: 300px !important;
+	height: 160px;
 	border-radius: 8px;
 	cursor: pointer;
 	background-color: #ffffff;
-	margin-bottom: 100px;
+	margin: 0 25px 50px;
+	padding: 50px;
+	overflow: hidden;
+	text-align: justify;
+}
+
+.class_card h2 {
+	margin: 0;
+}
+
+.class_card hr {
+	margin: 25px 0;
 }
