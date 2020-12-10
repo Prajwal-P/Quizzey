@@ -36,6 +36,12 @@ let all_classrooms = [
 	}
 ]
 
+// function cls_template(cls) {
+// 	return `
+// 	<div class="new_class">
+// 		<h1>${}</h1>
+// 	`
+// }
 
 
 let menu_visible = false;

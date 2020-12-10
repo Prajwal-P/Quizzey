@@ -78,16 +78,17 @@ body {
 }
 
 .root {
-	margin: 100px 95px 0;
+	margin: 100px 95px 0px;
 }
 
 .add_class {
-	position: absolute;
+	display: inline-block;
 	width: 350px;
 	height: 300px;
 	border-radius: 8px;
 	background-color: #ffffff;
 	cursor: pointer;
+	margin: 0 100px 100px 0;
 }
 
 .add_class span {
@@ -102,4 +103,14 @@ body {
 	text-align: center;
 	color: #e5e5e5;
 	margin: 0;
+}
+
+.class_card {
+	display: inline-block;
+	width: 350px;
+	height: 300px;
+	border-radius: 8px;
+	cursor: pointer;
+	background-color: #ffffff;
+	margin-bottom: 100px;
 }
