@@ -78,12 +78,50 @@ body {
 }
 
 .root {
-	margin: 100px 25px 100px;
+	margin: 0px 25px 100px;
+}
+
+.class_btns {
+	padding: 25px 50px;
+}
+
+.class_btns button {
+	border: 0;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	color: #ffffff;
+	padding: 8px 16px;
+	border-radius: 20px;
+	cursor: pointer;
+	margin: 0 25px;
+	transition: all 0.25s ease-in;
+}
+
+.class_btns button:nth-child(1) {
+	background-color: #66bb6a;
+}
+.class_btns button:nth-child(1):hover {
+	background-color: #43a047;
+}
+
+.class_btns button:nth-child(2) {
+	background-color: #ef5350;
+}
+.class_btns button:nth-child(2):hover {
+	background-color: #e53935;
+}
+
+.class_btns button span {
+	font-size: 24px;
+	display: inline-flex;
+	vertical-align: top;
+	/* line-height: 24px; */
 }
 
 .class_card_wrapper {
-	display: inline-block;
-	margin: 0 auto;
+	text-align: center;
 }
 
 .class_card {
