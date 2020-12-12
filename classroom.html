@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+		rel="stylesheet"
+	/>
+	<link
+		href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet"
+	/>
+	<link rel="stylesheet" href="classroom.css" />
+	<title>Quizzey</title>
+</head>
+<body>
+	<div class="nav_bar">
+		<h2>QUIZZEY</h2>
+		<div class="user_name" onclick="toggle_dropdown()">
+			<h2>FIRST_NAME</h2>
+			<img
+				src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg"
+				alt="Profile Picture"
+			/>
+		</div>
+		<div class="dd_wrapper" id="dropdown">
+			<button>Classroom</button>
+			<button>Profile</button>
+			<hr />
+			<button>Sign Out</button>
+		</div>
+	</div>
+	<div class="root">
+		<div class="class_card"></div>
+		<div class="add_quiz">
+			<span class="material-icons"> add_circle_outline </span>
+			<h1>ADD QUIZ</h1>
+		</div>
+		<div class="quiz_card_wrapper"></div>
+	</div>
+	<script src="classroom.js"></script>
+</body>
+</html>
