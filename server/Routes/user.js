@@ -162,4 +162,9 @@ router.post('/signIn', upload.none(), (req, res) => {
 	fetchUser();
 });
 
+router.get('/signOut', (req, res) => {
+	res.clearCookie('userId').clearCookie('authToken');
+	sendRes(1, res);
+});
+
 module.exports = router;
