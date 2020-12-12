@@ -5,6 +5,7 @@ const upload = multer();
 const mysqlConnection = require('../connection');
 
 const sendRes = require('../controllers/sendRes');
+const check = require('../middleware/checkUser.js');
 
 const router = express.Router();
 
@@ -162,8 +163,15 @@ router.post('/signIn', upload.none(), (req, res) => {
 	fetchUser();
 });
 
-router.get('/signOut', (req, res) => {
+router.get('/signOut', check, (req, res) => {
 	res.clearCookie('userId').clearCookie('authToken');
+	sendRes(1, res);
+});
+
+router.get('/check', check, (req, res) => {
+	data = {
+		USER_ID: parseInt(req.cookies.userId)
+	};
 	sendRes(1, res);
 });
 
