@@ -34,11 +34,11 @@
 		</div>
 		<div class="root">
 			<div class="class_btns">
-				<button onclick="toggle_modal()">
+				<button onclick="toggle_modal_1()">
 					<span class="material-icons"> add_circle_outline </span>
 					CREATE CLASS
 				</button>
-				<button>
+				<button onclick="toggle_modal_2()">
 					<span class="material-icons"> school </span>
 					JOIN CLASS
 				</button>
@@ -46,9 +46,9 @@
 			<div class="class_card_wrapper"></div>
 		</div>
 		<div class="modal-bg">
-			<div class="modal">
+			<div class="modal_1">
 				<h3>CREATE CLASS</h3>
-				<h3 onclick="toggle_modal()">
+				<h3 onclick="toggle_modal_1()">
 					<span class="material-icons">close</span>
 				</h3>
 				<hr />
@@ -56,9 +56,20 @@
 					<label>Classroom Name</label>
 					<input type="text" maxlength="20" required />
 					<label>Classroom Description</label>
-					<textarea name="" id="" maxlength="125" required></textarea>
-					<!-- <hr> -->
+					<input type="text" name="" id="" maxlength="125" required></input>
 					<button type="submit">ADD CLASS</button>
+				</form>
+			</div>
+			<div class="modal_2">
+				<h3>JOIN CLASS</h3>
+				<h3 onclick="toggle_modal_2()">
+					<span class="material-icons">close</span>
+				</h3>
+				<hr />
+				<form action="post">
+					<label>Classroom Code</label>
+					<input type="text" minlength="7" maxlength="7" required />
+					<button type="submit">JOIN CLASS</button>
 				</form>
 			</div>
 		</div>

@@ -65,14 +65,26 @@ function toggle_dropdown() {
 	}
 }
 
-let modal_visible = false;
-function toggle_modal() {
+let modal1_visible = false;
+function toggle_modal_1() {
 	let modal = document.querySelector('.modal-bg')
-	if (modal_visible) {
-		modal.classList.remove('show-modal');
-		modal_visible = false
+	if (modal1_visible) {
+		modal.classList.remove('show-modal1');
+		modal1_visible = false
 	} else {
-		modal.classList.add('show-modal');
-		modal_visible = true
+		modal.classList.add('show-modal1');
+		modal1_visible = true
+	}
+}
+
+let modal2_visible = false;
+function toggle_modal_2() {
+	let modal = document.querySelector('.modal-bg')
+	if (modal2_visible) {
+		modal.classList.remove('show-modal2');
+		modal2_visible = false
+	} else {
+		modal.classList.add('show-modal2');
+		modal2_visible = true
 	}
 }
