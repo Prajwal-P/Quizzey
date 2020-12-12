@@ -5,6 +5,10 @@ body {
 	background-color: #eceff1;
 }
 
+body button:focus {
+	outline: 0;
+}
+
 .nav_bar {
 	left: 0px;
 	top: 0px;
@@ -41,13 +45,11 @@ body {
 	border-radius: 8px;
 	padding: 8px 16px;
 	background-color: #ffffff;
-	transition: all 0.25s ease-in;
+	/* transition: all 0.25s ease-out; */
+	transition: visibility 0.25s ease-out, opacity 0.25s ease-out;
 	position: absolute;
 	top: 50px;
 	right: 50px;
-}
-
-.close {
 	opacity: 0;
 	visibility: hidden;
 }
@@ -67,6 +69,13 @@ body {
 	border-radius: 8px;
 	cursor: pointer;
 	margin: 2px 0px;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.show button {
+	opacity: 1;
+	visibility: visible;
 }
 
 .dd_wrapper button:hover {
@@ -75,6 +84,13 @@ body {
 
 .dd_wrapper hr {
 	margin: 0;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.show hr {
+	opacity: 1;
+	visibility: visible;
 }
 
 .root {
@@ -96,21 +112,21 @@ body {
 	border-radius: 20px;
 	cursor: pointer;
 	margin: 0 25px;
-	transition: all 0.25s ease-in;
+	transition: background-color 0.25s ease-in;
 }
 
 .class_btns button:nth-child(1) {
 	background-color: #66bb6a;
 }
 .class_btns button:nth-child(1):hover {
-	background-color: #43a047;
+	background-color: #388e3c;
 }
 
 .class_btns button:nth-child(2) {
 	background-color: #ef5350;
 }
 .class_btns button:nth-child(2):hover {
-	background-color: #e53935;
+	background-color: #d32f2f;
 }
 
 .class_btns button span {
@@ -143,4 +159,103 @@ body {
 
 .class_card hr {
 	margin: 25px 0;
+}
+
+.modal-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: all 0.25s ease-out;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.show-modal {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal {
+	width: 80%;
+	max-width: 500px;
+	background-color: #ffffff;
+	position: absolute;
+	transition: visibility 0s, opacity 0.25s ease-out, transform 0.25s ease-out;
+	transform: translate(50%, -100%);
+	opacity: 0;
+	visibility: hidden;
+	border-radius: 8px;
+}
+
+.show-modal .modal {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(50%, 30%);
+}
+
+.modal h3 {
+	display: inline-block;
+	margin: 16px 16px 8px;
+}
+
+.modal h3:nth-child(2) {
+	float: right;
+	cursor: pointer;
+	font-size: 24px;
+	height: 24px;
+}
+
+.modal form {
+	margin: 16px;
+}
+
+.modal form label {
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	margin-bottom: 16px;
+}
+
+.modal form input {
+	box-sizing: border-box;
+	width: 100%;
+	height: 38px;
+	margin-bottom: 16px;
+	border: 1px solid #c0c0c0;
+	border-radius: 8px;
+	padding: 6px 12px;
+	font-size: 1rem;
+}
+
+.modal form textarea {
+	box-sizing: border-box;
+	width: 100%;
+	height: 80px;
+	margin-bottom: 16px;
+	border: 1px solid #c0c0c0;
+	border-radius: 8px;
+	padding: 6px 12px;
+	font-size: 1rem;
+}
+
+.modal form button {
+	float: right;
+	padding: 6px;
+	width: 130px;
+	border: 0;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	color: #ffffff;
+	cursor: pointer;
+	background-color: #7e57c2;
+	border-radius: 18px;
+	margin-bottom: 16px;
+}
+
+.modal form button:hover {
+	background-color: #4d2c90;
 }

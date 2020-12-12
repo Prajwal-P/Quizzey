@@ -25,7 +25,7 @@
 					alt="Profile Picture"
 				/>
 			</div>
-			<div class="dd_wrapper close" id="dropdown">
+			<div class="dd_wrapper" id="dropdown">
 				<button>Classroom</button>
 				<button>Profile</button>
 				<hr />
@@ -34,7 +34,7 @@
 		</div>
 		<div class="root">
 			<div class="class_btns">
-				<button>
+				<button onclick="toggle_modal()">
 					<span class="material-icons"> add_circle_outline </span>
 					CREATE CLASS
 				</button>
@@ -44,6 +44,23 @@
 				</button>
 			</div>
 			<div class="class_card_wrapper"></div>
+		</div>
+		<div class="modal-bg">
+			<div class="modal">
+				<h3>CREATE CLASS</h3>
+				<h3 onclick="toggle_modal()">
+					<span class="material-icons">close</span>
+				</h3>
+				<hr />
+				<form action="post">
+					<label>Classroom Name</label>
+					<input type="text" maxlength="20" required />
+					<label>Classroom Description</label>
+					<textarea name="" id="" maxlength="125" required></textarea>
+					<!-- <hr> -->
+					<button type="submit">ADD CLASS</button>
+				</form>
+			</div>
 		</div>
 		<script src="dashboard.js"></script>
 	</body>

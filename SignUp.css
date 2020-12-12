@@ -1,28 +1,32 @@
 body {
-    background-color: #ECEFF1;
-    margin: 0;
+	background-color: #eceff1;
+	margin: 0;
 	font-family: 'Roboto', sans-serif;
 	font-style: normal;
 }
 
+body button:focus {
+	outline: 0;
+}
+
 .signUpCard {
-    width: 500px;
-    /* height: 700px; */
-    background: #FFFFFF;
-    /* Shadow 1 */
-    box-shadow: 2px 2px 8px 2px #E0E0E0, -2px -2px 8px 2px #E0E0E0;
-    border-radius: 20px;
-    position: absolute;
+	width: 500px;
+	/* height: 700px; */
+	background: #ffffff;
+	/* Shadow 1 */
+	box-shadow: 2px 2px 8px 2px #e0e0e0, -2px -2px 8px 2px #e0e0e0;
+	border-radius: 20px;
+	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
 .signUpCard h1 {
-    font-weight: 700;
-    font-size: 2em;
-    text-align: center;
-    color: #7E57C2;
+	font-weight: 700;
+	font-size: 2em;
+	text-align: center;
+	color: #7e57c2;
 	margin-bottom: 64px;
 	margin-top: 64px;
 }
@@ -33,10 +37,10 @@ body {
 }
 
 .name {
-    width: 190px;
-    height: 38px;
-    display: inline-block;
-    margin-bottom: 16px;
+	width: 190px;
+	height: 38px;
+	display: inline-block;
+	margin-bottom: 16px;
 	box-sizing: border-box;
 	border: 1px solid #c0c0c0;
 	border-radius: 8px;
@@ -45,18 +49,18 @@ body {
 }
 
 .radio_btn {
-    margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 .signUpCard label {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
 .rem_textbox {
-    width: 100%;
-    height: 38px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
+	width: 100%;
+	height: 38px;
+	margin-bottom: 16px;
+	box-sizing: border-box;
 	border: 1px solid #c0c0c0;
 	border-radius: 8px;
 	padding-left: 15px;

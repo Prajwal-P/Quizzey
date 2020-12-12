@@ -57,12 +57,22 @@ function toggle_dropdown() {
 	// let dd = document.getElementById("dropdown");
 	let dd = document.querySelector('.dd_wrapper')
 	if (menu_visible) {
-		dd.classList.add("close");
 		dd.classList.remove("show");
 		menu_visible = false;
 	} else {
-		dd.classList.remove("close");
 		dd.classList.add("show");
 		menu_visible = true;
+	}
+}
+
+let modal_visible = false;
+function toggle_modal() {
+	let modal = document.querySelector('.modal-bg')
+	if (modal_visible) {
+		modal.classList.remove('show-modal');
+		modal_visible = false
+	} else {
+		modal.classList.add('show-modal');
+		modal_visible = true
 	}
 }
