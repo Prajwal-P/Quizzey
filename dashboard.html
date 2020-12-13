@@ -19,7 +19,7 @@
 		<div class="nav_bar">
 			<h2>QUIZZEY</h2>
 			<div class="user_name" onclick="toggle_dropdown()">
-				<h2>FIRST_NAME</h2>
+				<h2 id="name">FIRST_NAME</h2>
 				<img
 					src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg"
 					alt="Profile Picture"
@@ -29,7 +29,7 @@
 				<button>Classroom</button>
 				<button>Profile</button>
 				<hr />
-				<button>Sign Out</button>
+				<button onclick="signOut()">Sign Out</button>
 			</div>
 		</div>
 		<div class="root">
@@ -73,6 +73,6 @@
 				</form>
 			</div>
 		</div>
-		<script src="dashboard.js"></script>
+		<script src="./dashboard.js"></script>
 	</body>
 </html>

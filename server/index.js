@@ -20,10 +20,16 @@ let corsOption = {
 app.use(cors(corsOption));
 // Cross-Origin support for the app
 app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
+	// res.header('Access-Control-Allow-Credentials', true);
+	// res.header(
+	// 	'Access-Control-Allow-Methods',
+	// 	'GET,PUT,POST,DELETE,UPDATE,OPTIONS'
+	// );
+	res.header('Access-Control-Allow-Origin', req.headers.origin);
+	// res.header('Access-Control-Allow-Origin', '*');
 	res.header(
 		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
+		'Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
 	);
 	next();
 });
