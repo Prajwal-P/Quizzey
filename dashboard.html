@@ -52,11 +52,11 @@
 					<span class="material-icons">close</span>
 				</h3>
 				<hr />
-				<form action="post">
+				<form id='createClassForm'>
 					<label>Classroom Name</label>
-					<input type="text" maxlength="20" required />
+					<input name="class_title" type="text" maxlength="20" required />
 					<label>Classroom Description</label>
-					<input type="text" name="" id="" maxlength="125" required></input>
+					<input name="class_desc" type="text" name="" id="" maxlength="125" required></input>
 					<button type="submit">ADD CLASS</button>
 				</form>
 			</div>
@@ -66,9 +66,9 @@
 					<span class="material-icons">close</span>
 				</h3>
 				<hr />
-				<form action="post">
+				<form id='joinClassForm'>
 					<label>Classroom Code</label>
-					<input type="text" minlength="7" maxlength="7" required />
+					<input name="classCode" type="text" minlength="7" maxlength="7" required />
 					<button type="submit">JOIN CLASS</button>
 				</form>
 			</div>
