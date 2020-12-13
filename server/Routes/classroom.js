@@ -31,7 +31,7 @@ router.post('/add', check, upload.none(), (req, res) => {
 	const generateClassCode = () => {
 		if (class_title && class_desc) {
 			classCode = generateString(7);
-			console.log(classCode);
+			// console.log(classCode);
 			sql = `SELECT CLASS_CODE FROM TBL_CLASSROOM;`;
 			mysqlConnection.query(sql, (err, result) => {
 				if (err) {
@@ -141,10 +141,10 @@ router.get('/', check, upload.none(), (req, res) => {
 	let sql = `SELECT CLS.ID, CLS.TITLE, CLS.DESCRIPTION 
 	FROM TBL_CLASSROOM CLS 
 	WHERE CLS.TEACHER_ID = ${userID} OR 
-	CLS.ID = (SELECT TBL_STUDENT_CLASSROOM.CLASS_ID 
+	CLS.ID IN (SELECT TBL_STUDENT_CLASSROOM.CLASS_ID 
 			FROM TBL_STUDENT_CLASSROOM 
 			WHERE TBL_STUDENT_CLASSROOM.STUDENT_ID = ${userID})
-	ORDER BY CLS.LAST_UPDATE, CLS.TITLE, CLS.ID;`;
+	ORDER BY CLS.LAST_UPDATE DESC, CLS.TITLE, CLS.ID;`;
 
 	mysqlConnection.query(sql, (err, result) => {
 		if (err) {
