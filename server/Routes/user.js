@@ -135,13 +135,17 @@ router.post('/signIn', upload.none(), (req, res) => {
 						// console.log(r);
 
 						res.cookie('userId', userId, {
+							sameSite: 'Lex',
 							httpOnly: true
+							// secure: true
 							// maxAge: 1000 * 60 * 60 * 2
 						}).cookie(
 							'authToken',
 							_authToken ? _authToken : r['insertId'],
 							{
+								sameSite: 'Lex',
 								httpOnly: true
+								// secure: true
 								// maxAge: 1000 * 60 * 60 * 2
 							}
 						);
