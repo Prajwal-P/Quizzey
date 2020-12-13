@@ -1,3 +1,5 @@
+let baseURL = 'http://127.0.0.1:8888';
+
 let all_classrooms = [
 	{
 		id: 1,
@@ -40,6 +42,26 @@ let all_classrooms = [
 	}
 ];
 
+window.onload = () => {
+	var requestOptions = {
+		method: 'GET',
+		mode: 'cors',
+		credentials: 'include'
+	};
+
+	fetch(`${baseURL}/user/check`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			// console.log(res);
+			if (res.STATUS === 1);
+			else window.location = 'signIn.html';
+			document.getElementById('name').innerHTML = sessionStorage.getItem(
+				'name'
+			);
+		})
+		.catch(error => console.log('error', error));
+};
+
 function cls_template(cls) {
 	return `
 		<div class="class_card">
@@ -81,6 +103,21 @@ function toggle_modal() {
 	}
 }
 
-window.onload = () => {
-	document.getElementById('name').innerHTML = sessionStorage.getItem('name');
+let signOut = () => {
+	sessionStorage.clear();
+
+	var requestOptions = {
+		method: 'GET',
+		mode: 'cors',
+		credentials: 'include'
+	};
+	fetch(`${baseURL}/user/signOut`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			alert(res.MESSAGE);
+			if (res.STATUS === 1) {
+				window.location = 'signIn.html';
+			}
+		})
+		.catch(error => console.log('error', error));
 };
