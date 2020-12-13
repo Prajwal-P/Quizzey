@@ -116,7 +116,11 @@ router.post('/join', check, upload.none(), (req, res) => {
 		sql = `INSERT INTO TBL_STUDENT_CLASSROOM(STUDENT_ID, CLASS_ID) VALUES ('${studentID}', '${classID}');`;
 		mysqlConnection.query(sql, (err, result) => {
 			if (err) {
-				sendRes(-1, res);
+				if (err.code === 'ER_DUP_ENTRY') {
+					sendRes(1, res, undefined, 'CLASSROOM ALREADY JOINED');
+				} else {
+					sendRes(-1, res);
+				}
 			} else {
 				sendRes(
 					1,
