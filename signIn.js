@@ -35,8 +35,6 @@ signInForm.addEventListener('submit', e => {
 		body: data
 	};
 
-	console.log(baseURL);
-
 	fetch(`${baseURL}/user/signIn`, requestOptions)
 		.then(result => result.json())
 		.then(res => {
