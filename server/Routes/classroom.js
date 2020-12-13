@@ -84,4 +84,51 @@ router.post('/add', check, upload.none(), (req, res) => {
 	generateClassCode();
 });
 
+router.post('/join', check, upload.none(), (req, res) => {
+	const { classCode } = req.body;
+	const studentID = req.cookies.userId;
+	let classID;
+
+	const getClassID = () => {
+		sql = `SELECT ID, TEACHER_ID FROM TBL_CLASSROOM WHERE CLASS_CODE='${classCode}'`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(2, res, undefined, 'INVALID CLASS CODE');
+				} else {
+					classID = result[0]['ID'];
+					if (studentID != result[0]['TEACHER_ID']) joinStudent();
+					else
+						sendRes(
+							2,
+							res,
+							undefined,
+							'YOU ARE THE OWNER OF THE CLASS, JOINING THE CLASS IS NOT NECESSARY'
+						);
+				}
+			}
+		});
+	};
+
+	const joinStudent = () => {
+		sql = `INSERT INTO TBL_STUDENT_CLASSROOM(STUDENT_ID, CLASS_ID) VALUES ('${studentID}', '${classID}');`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				sendRes(
+					1,
+					res,
+					{ classID: classID },
+					'JOINED CLASS SUCCESSFULLY'
+				);
+			}
+		});
+	};
+
+	getClassID();
+});
+
 module.exports = router;
