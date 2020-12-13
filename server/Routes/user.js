@@ -135,7 +135,7 @@ router.post('/signIn', upload.none(), (req, res) => {
 						// console.log(r);
 
 						res.cookie('userId', userId, {
-							sameSite: 'Lex',
+							SameSite: 'Lex',
 							httpOnly: true
 							// secure: true
 							// maxAge: 1000 * 60 * 60 * 2
@@ -143,7 +143,7 @@ router.post('/signIn', upload.none(), (req, res) => {
 							'authToken',
 							_authToken ? _authToken : r['insertId'],
 							{
-								sameSite: 'Lex',
+								SameSite: 'Lex',
 								httpOnly: true
 								// secure: true
 								// maxAge: 1000 * 60 * 60 * 2
