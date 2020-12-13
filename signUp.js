@@ -1,3 +1,21 @@
+let baseURL = 'http://127.0.0.1:8888';
+
+window.onload = () => {
+	var requestOptions = {
+		method: 'GET',
+		mode: 'cors',
+		credentials: 'include'
+	};
+
+	fetch(`${baseURL}/user/check`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			// console.log(res);
+			if (res.STATUS === 1) window.location = 'dashboard.html';
+		})
+		.catch(error => console.log('error', error));
+};
+
 let signUpForm = document.getElementById('signUpForm');
 
 signUpForm.addEventListener('submit', e => {
@@ -18,7 +36,7 @@ signUpForm.addEventListener('submit', e => {
 			body: data
 		};
 
-		fetch('http://localhost:8888/user/signup', requestOptions)
+		fetch(`${baseURL}/user/signup`, requestOptions)
 			.then(result => result.json())
 			.then(res => {
 				// console.log(res);
