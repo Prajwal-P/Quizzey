@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
 				// console.log(hr, min);
 				exp.setHours(exp.getHours() + hr);
 				exp.setMinutes(exp.getMinutes() + min);
-				console.log(exp);
+				// console.log(exp);
 				let now = new Date();
 				if (now <= exp) {
 					next();
