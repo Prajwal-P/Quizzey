@@ -12,6 +12,12 @@ module.exports = (s, res, data, msg) => {
 			MESSAGE: msg || 'SUCCESS',
 			DATA: data
 		});
+	} else if (s == 2) {
+		res.status(200).json({
+			STATUS: 0,
+			MESSAGE: msg || 'FAILURE',
+			DATA: data
+		});
 	} else if (s == 0) {
 		res.status(401).json({
 			STATUS: 0,
