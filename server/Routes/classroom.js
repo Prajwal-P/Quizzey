@@ -96,13 +96,13 @@ router.post('/join', check, upload.none(), (req, res) => {
 				sendRes(-1, res);
 			} else {
 				if (result.length === 0) {
-					sendRes(2, res, undefined, 'INVALID CLASS CODE');
+					sendRes(1, res, undefined, 'INVALID CLASS CODE');
 				} else {
 					classID = result[0]['ID'];
 					if (studentID != result[0]['TEACHER_ID']) joinStudent();
 					else
 						sendRes(
-							2,
+							1,
 							res,
 							undefined,
 							'YOU ARE THE OWNER OF THE CLASS, JOINING THE CLASS IS NOT NECESSARY'
@@ -129,6 +129,30 @@ router.post('/join', check, upload.none(), (req, res) => {
 	};
 
 	getClassID();
+});
+
+router.get('/', check, upload.none(), (req, res) => {
+	let userID = req.cookies.userId;
+
+	let sql = `SELECT CLS.ID, CLS.TITLE, CLS.DESCRIPTION 
+	FROM TBL_CLASSROOM CLS 
+	WHERE CLS.TEACHER_ID = ${userID} OR 
+	CLS.ID = (SELECT TBL_STUDENT_CLASSROOM.CLASS_ID 
+			FROM TBL_STUDENT_CLASSROOM 
+			WHERE TBL_STUDENT_CLASSROOM.STUDENT_ID = ${userID})
+	ORDER BY CLS.LAST_UPDATE, CLS.TITLE, CLS.ID;`;
+
+	mysqlConnection.query(sql, (err, result) => {
+		if (err) {
+			sendRes(-1, res);
+		} else {
+			if (result.length === 0) {
+				sendRes(1, res, result, 'NO CLASSROOMS JOINED');
+			} else {
+				sendRes(1, res, result);
+			}
+		}
+	});
 });
 
 module.exports = router;
