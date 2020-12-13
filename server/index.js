@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const user = require('./Routes/user.js');
+const classroom = require('./Routes/classroom.js');
 
 const port = process.env.PORT || 8888;
 
@@ -46,5 +47,6 @@ app.use('/test', (req, res) => {
 });
 
 app.use('/user', user);
+app.use('/classroom', classroom);
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
