@@ -1,46 +1,6 @@
 let baseURL = 'http://127.0.0.1:8888';
 
-let all_classrooms = [
-	{
-		id: 1,
-		name: 'Web Technology',
-		description:
-			'Subject Code : 17CS71, Teacher : Sushma H R, Classroom for taking quiz related to HTML, CSS and JS'
-	},
-	{
-		id: 2,
-		name: 'Advanced Computer Architecture',
-		description:
-			'Subject Code : 17CS72, Teacher : Hemavathi, Classroom for taking quiz related to ACA'
-	},
-	{
-		id: 3,
-		name: 'ML',
-		description: 'Subject Code : 17CS73, Teacher : Asha T'
-	},
-	{
-		id: 4,
-		name: 'UNIX',
-		description:
-			'Teacher : Divyashree, Classroom for taking quiz related to unix'
-	},
-	{
-		id: 5,
-		name: 'SAN',
-		description: 'Teacher : Nikhitha'
-	},
-	{
-		id: 6,
-		name: 'Web Technology lab and Mini-project',
-		description: ''
-	},
-	{
-		id: 7,
-		name: 'ML LAb',
-		description:
-			'Teacher : Madhuri, Classroom for taking quiz related to ML lab'
-	}
-];
+let all_classrooms = '';
 
 window.onload = () => {
 	var requestOptions = {
@@ -60,23 +20,35 @@ window.onload = () => {
 			);
 		})
 		.catch(error => console.log('error', error));
-};
 
-function cls_template(cls) {
-	return `
-		<div class="class_card">
-			<h2>${cls.name}</h2>
+	function cls_template(cls) {
+		return `
+		<div class="class_card" id=${cls.ID}>
+			<h2>${cls.TITLE}</h2>
 			<hr />
 			<span>
-				${cls.description}
+				${cls.DESCRIPTION}
 			</span>
 		</div>
 	`;
-}
+	}
 
-document.querySelector('.class_card_wrapper').innerHTML = `
-	${all_classrooms.map(cls_template).join('')}
-`;
+	fetch(`${baseURL}/classroom`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			if (res.STATUS === 1) {
+				// console.log(res.DATA);
+				all_classrooms = res.DATA;
+				document.querySelector('.class_card_wrapper').innerHTML = `
+					${all_classrooms.map(cls_template).join('')}
+				`;
+			}
+		})
+		.catch(error => console.log('error', error));
+
+	document.querySelector('.class_card_wrapper').innerHTML =
+		'<h1>Loading...<h1>';
+};
 
 let menu_visible = false;
 function toggle_dropdown() {
@@ -103,6 +75,34 @@ function toggle_modal_1() {
 	}
 }
 
+let createClassForm = document.getElementById('createClassForm');
+createClassForm.addEventListener('submit', e => {
+	e.preventDefault();
+
+	let data = new FormData();
+	for (let i = 0; i < 2; i++) {
+		data.append(createClassForm[i].name, createClassForm[i].value);
+	}
+
+	var requestOptions = {
+		method: 'POST',
+		mode: 'cors',
+		credentials: 'include',
+		body: data
+	};
+
+	fetch(`${baseURL}/classroom/add`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			alert(res.MESSAGE);
+			if (res.STATUS === 1) {
+				location.reload();
+				// Redirect to classroom.html/id
+				// window.location = 'signIn.html';
+			}
+		});
+});
+
 let modal2_visible = false;
 function toggle_modal_2() {
 	let modal = document.querySelector('.modal-bg');
@@ -115,6 +115,32 @@ function toggle_modal_2() {
 	}
 }
 
+let joinClassForm = document.getElementById('joinClassForm');
+joinClassForm.addEventListener('submit', e => {
+	e.preventDefault();
+
+	let data = new FormData();
+	data.append(joinClassForm[0].name, joinClassForm[0].value);
+
+	var requestOptions = {
+		method: 'POST',
+		mode: 'cors',
+		credentials: 'include',
+		body: data
+	};
+
+	fetch(`${baseURL}/classroom/join`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			alert(res.MESSAGE);
+			if (res.DATA) {
+				location.reload();
+				// Redirect to classroom.html/id
+				// window.location = 'signIn.html';
+			}
+		});
+});
+
 let signOut = () => {
 	sessionStorage.clear();
 
@@ -126,9 +152,10 @@ let signOut = () => {
 	fetch(`${baseURL}/user/signOut`, requestOptions)
 		.then(result => result.json())
 		.then(res => {
-			alert(res.MESSAGE);
 			if (res.STATUS === 1) {
 				window.location = 'signIn.html';
+			} else {
+				alert(res.MESSAGE);
 			}
 		})
 		.catch(error => console.log('error', error));
