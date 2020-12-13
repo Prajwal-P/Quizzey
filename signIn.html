@@ -12,17 +12,24 @@
 		<link rel="stylesheet" href="./signIn.css" />
 		<title>Quizzey</title>
 	</head>
+
 	<body>
 		<div class="signInCard">
 			<h1>QUIZZEY</h1>
-			<form>
-				<input type="email" placeholder="Email" required />
-				<input type="password" placeholder="Password" required />
+			<form id="signInForm">
+				<input type="email" placeholder="Email" name="email" required />
+				<input
+					type="password"
+					placeholder="Password"
+					name="password"
+					required
+				/>
 				<a>Forgot Password ?</a>
 				<button type="submit">LOGIN</button>
 			</form>
 			<span>Don't have an account ?</span>
 			<a class="sign-up" href="./SignUp.html">Sign Up</a>
 		</div>
+		<script src="./signIn.js"></script>
 	</body>
 </html>
