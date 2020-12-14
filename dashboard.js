@@ -23,7 +23,7 @@ window.onload = () => {
 
 	function cls_template(cls) {
 		return `
-		<div class="class_card" id=${cls.ID}>
+		<div class="class_card" id=${cls.ID} onclick="openClassroom(${cls.ID})">
 			<h2>${cls.TITLE}</h2>
 			<hr />
 			<span>
@@ -96,9 +96,9 @@ createClassForm.addEventListener('submit', e => {
 		.then(res => {
 			alert(res.MESSAGE);
 			if (res.STATUS === 1) {
-				location.reload();
+				// location.reload();
 				// Redirect to classroom.html/id
-				// window.location = 'signIn.html';
+				window.location = `classroom.html?classID=${res.DATA['classID']}`;
 			}
 		});
 });
@@ -134,12 +134,16 @@ joinClassForm.addEventListener('submit', e => {
 		.then(res => {
 			alert(res.MESSAGE);
 			if (res.DATA) {
-				location.reload();
+				// location.reload();
 				// Redirect to classroom.html/id
-				// window.location = 'signIn.html';
+				window.location = `classroom.html?classID=${res.DATA['classID']}`;
 			}
 		});
 });
+
+let openClassroom = id => {
+	window.location = `classroom.html?classID=${id}`;
+};
 
 let signOut = () => {
 	sessionStorage.clear();
