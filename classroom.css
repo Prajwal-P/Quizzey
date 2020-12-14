@@ -5,7 +5,13 @@ body {
 	background-color: #eceff1;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
 	margin: 0px;
 	padding: 0px;
 }
@@ -48,6 +54,7 @@ body button:focus {
 .dd_wrapper {
 	width: 90px;
 	border-radius: 8px;
+	border: 1px solid #f3f3f3;
 	padding: 8px 16px;
 	background-color: #ffffff;
 	/* transition: all 0.25s ease-out; */
@@ -119,26 +126,52 @@ body button:focus {
 	justify-content: space-between;
 }
 
-.add_quiz {
+.options_card {
 	background-color: #ffffff;
 	border-radius: 8px;
-	width: 630px;
-	height: 160px;
+	width: 840px;
 	margin: auto;
+	padding: 16px;
+	text-align: center;
+}
+
+.class_code {
+	margin: 16px;
+}
+
+.class_code h1 {
+	display: inline;
+}
+
+.class_code span {
+	display: inline;
+	font-size: 32px;
+}
+
+.opt_btns {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	margin: 16px 0;
+}
+
+.opt_btns button {
+	width: 200px;
+	font-size: 20px;
+	border: 0;
+	background-color: #7e57c2;
+	color: #ffffff;
+	padding: 6px 0;
+	border-radius: 8px;
 	cursor: pointer;
-	align-items: center;
 }
 
-.add_quiz span {
-	font-size: 100px;
-	color: #E0E0E0;
-	margin-right: 32px;
+.opt_btns button:hover {
+	background-color: #4d2c90;
 }
 
-.add_quiz h1 {
-	color: #E0E0E0;
+.opt_btns button span {
+	display: inline-flex;
+	vertical-align: top;
 }
 
 .quiz_card {
@@ -165,15 +198,15 @@ body button:focus {
 }
 
 .quiz_name_and_marks p {
-	color: #C8C8C8;
+	color: #c8c8c8;
 }
 
 .dur_and_no_of_que p {
-	color: #C8C8C8;
+	color: #c8c8c8;
 }
 
 .dur_and_no_of_que button {
-	background-color: #7E57C2;
+	background-color: #7e57c2;
 	font-size: 16px;
 	text-align: center;
 	border-radius: 8px;
@@ -209,7 +242,7 @@ body button:focus {
 }
 
 .btn_sec {
-	background-color: #66bb6a !important; 
+	background-color: #66bb6a !important;
 }
 
 .btn_sec:hover {
