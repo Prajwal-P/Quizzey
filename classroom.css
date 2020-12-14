@@ -109,6 +109,10 @@ body button:focus {
 	margin: 64px 0px;
 }
 
+.class_card h1 {
+	text-align: center;
+}
+
 .class_room {
 	background-color: #ffffff;
 	width: 840px;
@@ -133,6 +137,7 @@ body button:focus {
 	margin: auto;
 	padding: 16px;
 	text-align: center;
+	display: none;
 }
 
 .class_code {
