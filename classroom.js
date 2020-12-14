@@ -1,4 +1,5 @@
 let baseURL = 'http://127.0.0.1:8888';
+let classID = -1;
 
 let classroom = {
 	id: 1,
@@ -75,13 +76,20 @@ window.onload = () => {
 		.then(result => result.json())
 		.then(res => {
 			// console.log(res);
-			if (res.STATUS === 1);
+			if (res.STATUS === 1)
+				document.getElementById(
+					'name'
+				).innerHTML = sessionStorage.getItem('name');
 			else window.location = 'signIn.html';
-			document.getElementById('name').innerHTML = sessionStorage.getItem(
-				'name'
-			);
 		})
 		.catch(error => console.log('error', error));
+
+	classID = window.location.search
+		.substring(1)
+		.split('&')
+		.map(ele => ele.split('='))[0][1];
+
+	// console.log(classID);
 
 	document.querySelector('.class_card').innerHTML = `
 	<div class="class_room">
