@@ -93,7 +93,7 @@ window.onload = () => {
 	</div>
 	`;
 
-	let add_quiz_card = document.querySelector('.add_quiz');
+	let add_quiz_card = document.querySelector('.options_card');
 	if (!classroom.class_code) {
 		add_quiz_card.style.display = 'None';
 	} else {
