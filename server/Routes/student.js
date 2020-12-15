@@ -33,7 +33,7 @@ router.get('/allstudents/:classID', check, (req, res) => {
 	};
 
 	const retriveStudents = () => {
-		sql = `SELECT U.FIRST_NAME, U.LAST_NAME, U.EMAIL
+		sql = `SELECT U.ID, U.FIRST_NAME, U.LAST_NAME, U.EMAIL
 			FROM TBL_USER U, TBL_STUDENT_CLASSROOM S
 			WHERE U.ID=S.STUDENT_ID AND S.CLASS_ID='${classID}';`;
 		mysqlConnection.query(sql, (err, result) => {
