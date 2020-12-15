@@ -4,7 +4,7 @@ let classID = -1;
 let classroom = {};
 
 window.onload = () => {
-	var requestOptions = {
+	let requestOptions = {
 		method: 'GET',
 		mode: 'cors',
 		credentials: 'include'
@@ -257,7 +257,7 @@ const toDashboard = () => {
 const signOut = () => {
 	sessionStorage.clear();
 
-	var requestOptions = {
+	let requestOptions = {
 		method: 'GET',
 		mode: 'cors',
 		credentials: 'include'
@@ -291,7 +291,7 @@ deleteClassForm.addEventListener('submit', e => {
 	e.preventDefault();
 
 	if (deleteClassForm[0].value === classroom.TITLE) {
-		var requestOptions = {
+		let requestOptions = {
 			method: 'DELETE',
 			mode: 'cors',
 			credentials: 'include'
@@ -316,3 +316,35 @@ deleteClassForm.addEventListener('submit', e => {
 		);
 	}
 });
+
+const allStudents = () => {
+	let quiz_card_wrapper = document.querySelector('.quiz_card_wrapper');
+	quiz_card_wrapper.innerHTML = '<h1>Loading...</h1>';
+	let requestOptions = {
+		method: 'GET',
+		mode: 'cors',
+		credentials: 'include'
+	};
+	fetch(`${baseURL}/student/allstudents/${classID}`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			if (res.STATUS === 1) {
+				let students = res.DATA;
+				if (students.length === 0)
+					quiz_card_wrapper.innerHTML =
+						'<h1>No Students in this Class</h1>';
+				else {
+					let stu_table =
+						'<table><tr><th>FIRST NAME</th><th>LAST NAME</th><th>EMAIL</th></tr>';
+					for (let student of students) {
+						stu_table += `<tr><td>${student.FIRST_NAME}</td><td>${student.LAST_NAME}</td><td>${student.EMAIL}</td></tr>`;
+					}
+					stu_table += '</table>';
+					quiz_card_wrapper.innerHTML = stu_table;
+				}
+			} else {
+				alert(res.MESSAGE);
+				window.location = 'dashboard.html';
+			}
+		});
+};

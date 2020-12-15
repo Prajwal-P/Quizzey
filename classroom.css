@@ -179,6 +179,35 @@ body button:focus {
 	vertical-align: top;
 }
 
+.quiz_card_wrapper h1 {
+	text-align: center;
+}
+
+.quiz_card_wrapper table {
+	margin: 16px auto;
+	border-collapse: collapse;
+}
+
+.quiz_card_wrapper table,
+th,
+tr,
+td {
+	border: 0px solid black;
+	padding: 8px;
+	width: 500px;
+	text-align: center;
+}
+
+.quiz_card_wrapper table th {
+	background-color: #bd4702;
+	color: white;
+}
+
+.quiz_card_wrapper table td {
+	background-color: #0277bd;
+	color: white;
+}
+
 .quiz_card {
 	background-color: #ffffff;
 	width: 840px;
