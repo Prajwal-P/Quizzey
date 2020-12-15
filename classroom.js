@@ -273,3 +273,46 @@ const signOut = () => {
 		})
 		.catch(error => console.log('error', error));
 };
+
+let modal1_visible = false;
+function toggle_modal_1() {
+	let modal = document.querySelector('.modal-bg');
+	if (modal1_visible) {
+		modal.classList.remove('show-modal1');
+		modal1_visible = false;
+	} else {
+		modal.classList.add('show-modal1');
+		modal1_visible = true;
+	}
+}
+
+const deleteClassForm = document.getElementById('deleteClassForm');
+deleteClassForm.addEventListener('submit', e => {
+	e.preventDefault();
+
+	if (deleteClassForm[0].value === classroom.TITLE) {
+		var requestOptions = {
+			method: 'DELETE',
+			mode: 'cors',
+			credentials: 'include'
+		};
+		fetch(`${baseURL}/classroom/delete/${classID}`, requestOptions)
+			.then(result => result.json())
+			.then(res => {
+				alert(res.MESSAGE);
+				if (res.STATUS === 1) {
+					window.location = 'dashboard.html';
+				}
+			})
+			.catch(error => console.log('error', error));
+	} else {
+		document.getElementById('err_info').classList.add('show_err_info');
+		setTimeout(
+			() =>
+				document
+					.getElementById('err_info')
+					.classList.remove('show_err_info'),
+			5000
+		);
+	}
+});

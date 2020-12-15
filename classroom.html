@@ -40,7 +40,7 @@
 					<span id="classCode"></span>
 				</div>
 				<div class="opt_btns">
-					<button>
+					<button onclick="toggle_modal_1()">
 						<span class="material-icons"> remove_circle </span>
 						Delete Class
 					</button>
@@ -55,6 +55,32 @@
 				</div>
 			</div>
 			<div class="quiz_card_wrapper"></div>
+		</div>
+		<div class="modal-bg">
+			<div class="modal_1">
+				<h3>DELETE CLASS</h3>
+				<h3 onclick="toggle_modal_1()">
+					<span class="material-icons">close</span>
+				</h3>
+				<hr />
+				<form id="deleteClassForm">
+					<p>
+						Please enter the classname to confirm the deletion of
+						class
+					</p>
+					<input
+						id="class_title"
+						type="text"
+						maxlength="20"
+						required
+					/>
+					<p id="err_info">
+						<span class="material-icons"> error </span>
+						Incorrect Classname
+					</p>
+					<button type="submit">DELETE CLASS</button>
+				</form>
+			</div>
 		</div>
 		<script src="classroom.js"></script>
 	</body>
