@@ -135,6 +135,122 @@ router.post('/join', check, upload.none(), (req, res) => {
 	getClassID();
 });
 
+router.get('/:classID', check, (req, res) => {
+	const classID = req.params['classID'];
+	const userID = req.cookies.userId;
+	let data;
+
+	const getUserType = () => {
+		sql = `SELECT * FROM TBL_STUDENT_CLASSROOM WHERE STUDENT_ID='${userID}' AND CLASS_ID='${classID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					// check if teacher
+					isOwnerOfClass();
+				} else {
+					getData(false);
+				}
+			}
+		});
+	};
+
+	const isOwnerOfClass = () => {
+		sql = `SELECT TEACHER_ID FROM TBL_CLASSROOM WHERE TEACHER_ID='${userID}' AND ID='${classID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'OOPS ERROR 404, YOU ARE NOT SUPPOSED TO BE IN THIS PAGE'
+					);
+				} else {
+					getData(true);
+				}
+			}
+		});
+	};
+
+	const getData = isTeacher => {
+		if (isTeacher) {
+			sql = `SELECT C.ID, C.TITLE, C.DESCRIPTION, 
+			C.CLASS_CODE, U.FIRST_NAME, U.LAST_NAME 
+			FROM TBL_CLASSROOM C, TBL_USER U 
+			WHERE C.ID='${classID}' AND 
+			C.TEACHER_ID='${userID}' AND 
+			U.ID='${userID}';`;
+		} else {
+			sql = `SELECT C.ID, C.TITLE, C.DESCRIPTION, 
+			U.FIRST_NAME, U.LAST_NAME 
+			FROM TBL_CLASSROOM C, TBL_USER U 
+			WHERE C.ID='${classID}' AND 
+			U.ID=C.TEACHER_ID;`;
+		}
+
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'OOPS ERROR 404, YOU ARE NOT SUPPOSED TO BE IN THIS PAGE'
+					);
+				} else {
+					data = result[0];
+					data['FULL_NAME'] =
+						data['FIRST_NAME'] + ' ' + data['LAST_NAME'];
+					delete data['FIRST_NAME'];
+					delete data['LAST_NAME'];
+					getQuizzes();
+				}
+			}
+		});
+	};
+
+	const getQuizzes = () => {
+		sql = `SELECT ID, TITLE, DESCRIPTION, NO_OF_QUESTIONS, DURATION, MAX_MARKS, START_TIME, END_TIME
+		FROM TBL_QUIZ WHERE CLASS_ID='${classID}' ORDER BY LAST_UPDATE DESC, TITLE, ID;`;
+		mysqlConnection.query(sql, async (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					data['QUIZZES'] = result;
+					sendRes(1, res, data);
+				} else {
+					result.map((ele, i) => {
+						sql = `SELECT MARKS FROM TBL_SCORE WHERE STUDENT_ID='${userID}' AND QUIZ_ID='${ele.ID}';`;
+						mysqlConnection.query(sql, (err, result1) => {
+							if (err) {
+								sendRes(-1, res);
+							} else {
+								if (result1.length > 0) {
+									// console.log(result1[0]);
+									result[i]['SCORE'] = result1[0]['MARKS'];
+								}
+							}
+							if (i === result.length - 1) {
+								data['QUIZZES'] = result;
+								sendRes(1, res, data);
+							}
+						});
+					});
+				}
+			}
+		});
+	};
+
+	getUserType();
+});
+
 router.get('/', check, upload.none(), (req, res) => {
 	let userID = req.cookies.userId;
 
@@ -157,6 +273,42 @@ router.get('/', check, upload.none(), (req, res) => {
 			}
 		}
 	});
+});
+
+router.delete('/delete/:classID', check, (req, res) => {
+	const classID = req.params['classID'];
+	const userID = req.cookies.userId;
+
+	const isTeacher = () => {
+		sql = `SELECT * FROM TBL_CLASSROOM WHERE ID='${classID}' AND TEACHER_ID='${userID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else deleteClass();
+			}
+		});
+	};
+
+	const deleteClass = () => {
+		sql = `DELETE FROM TBL_CLASSROOM WHERE ID='${classID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				sendRes(1, res, undefined, 'CLASS DELETED SUCCESSFULLY');
+			}
+		});
+	};
+
+	isTeacher();
 });
 
 module.exports = router;

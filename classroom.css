@@ -109,6 +109,10 @@ body button:focus {
 	margin: 64px 0px;
 }
 
+.class_card h1 {
+	text-align: center;
+}
+
 .class_room {
 	background-color: #ffffff;
 	width: 840px;
@@ -133,6 +137,7 @@ body button:focus {
 	margin: auto;
 	padding: 16px;
 	text-align: center;
+	display: none;
 }
 
 .class_code {
@@ -251,4 +256,117 @@ body button:focus {
 
 .btn_ter {
 	background-color: #d32f2f !important;
+}
+
+.modal-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: all 0.25s ease-out;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.show-modal1 {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal_1 {
+	width: 80%;
+	max-width: 500px;
+	background-color: #ffffff;
+	position: absolute;
+	left: 50%;
+	transition: visibility 0s, opacity 0.25s ease-out, transform 0.25s ease-out;
+	transform: translate(-50%, -100%);
+	opacity: 0;
+	visibility: hidden;
+	border-radius: 8px;
+}
+
+.show-modal1 .modal_1 {
+	opacity: 1;
+	visibility: visible;
+	transform: translate(-50%, 30%);
+}
+
+.modal_1 h3 {
+	display: inline-block;
+	margin: 16px 16px 8px;
+}
+
+.modal_1 h3:nth-child(2) {
+	float: right;
+	cursor: pointer;
+	font-size: 24px;
+	height: 24px;
+}
+
+.modal_1 form {
+	margin: 16px;
+}
+
+.modal_1 form input {
+	box-sizing: border-box;
+	width: 100%;
+	height: 38px;
+	margin: 16px 0;
+	border: 1px solid #c0c0c0;
+	border-radius: 8px;
+	padding: 6px 12px;
+	font-size: 1rem;
+}
+
+.modal_1 form button {
+	float: right;
+	padding: 6px 12px;
+	border: 0;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	color: #ffffff;
+	cursor: pointer;
+	background-color: #7e57c2;
+	border-radius: 18px;
+	margin-bottom: 16px;
+}
+
+.modal_1 form button:hover {
+	background-color: #4d2c90;
+}
+
+#err_info {
+	background-color: #ff8a80;
+	border-radius: 8px;
+	color: #b71c1c;
+	transition: all 0.25s ease-out;
+	opacity: 0;
+	visibility: hidden;
+	height: 0;
+	font-size: 0;
+}
+
+#err_info span {
+	display: inline-flex;
+	vertical-align: top;
+	font-size: 0;
+}
+
+.show_err_info {
+	border: 1px solid rgba(183, 28, 28, 0.4);
+	padding: 4px;
+	height: auto !important;
+	font-size: 16px !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+	margin-bottom: 16px;
+}
+
+.show_err_info span {
+	font-size: 20px !important;
 }

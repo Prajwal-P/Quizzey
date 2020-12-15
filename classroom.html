@@ -19,28 +19,28 @@
 		<div class="nav_bar">
 			<h2>QUIZZEY</h2>
 			<div class="user_name" onclick="toggle_dropdown()">
-				<h2>FIRST_NAME</h2>
+				<h2 id="name">FIRST_NAME</h2>
 				<img
 					src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg"
 					alt="Profile Picture"
 				/>
 			</div>
 			<div class="dd_wrapper" id="dropdown">
-				<button>Classroom</button>
+				<button onclick="toDashboard()">Dashboard</button>
 				<button>Profile</button>
 				<hr />
-				<button>Sign Out</button>
+				<button onclick="signOut()">Sign Out</button>
 			</div>
 		</div>
 		<div class="root">
-			<div class="class_card"></div>
+			<div class="class_card"><h1>Loading...</h1></div>
 			<div class="options_card">
 				<div class="class_code">
 					<h1>Class Code:</h1>
 					<span id="classCode"></span>
 				</div>
 				<div class="opt_btns">
-					<button>
+					<button onclick="toggle_modal_1()">
 						<span class="material-icons"> remove_circle </span>
 						Delete Class
 					</button>
@@ -55,6 +55,32 @@
 				</div>
 			</div>
 			<div class="quiz_card_wrapper"></div>
+		</div>
+		<div class="modal-bg">
+			<div class="modal_1">
+				<h3>DELETE CLASS</h3>
+				<h3 onclick="toggle_modal_1()">
+					<span class="material-icons">close</span>
+				</h3>
+				<hr />
+				<form id="deleteClassForm">
+					<p>
+						Please enter the classname to confirm the deletion of
+						class
+					</p>
+					<input
+						id="class_title"
+						type="text"
+						maxlength="20"
+						required
+					/>
+					<p id="err_info">
+						<span class="material-icons"> error </span>
+						Incorrect Classname
+					</p>
+					<button type="submit">DELETE CLASS</button>
+				</form>
+			</div>
 		</div>
 		<script src="classroom.js"></script>
 	</body>
