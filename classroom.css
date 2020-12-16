@@ -181,6 +181,7 @@ body button:focus {
 
 .quiz_card_wrapper h1 {
 	text-align: center;
+	margin: 16px;
 }
 
 .quiz_card_wrapper table {
@@ -192,13 +193,18 @@ body button:focus {
 th,
 tr,
 td {
-	border: 0px solid black;
+	border: 1px solid black;
 	padding: 8px;
-	width: 500px;
 	text-align: center;
+	background-color: #ffffff;
 }
 
-.quiz_card_wrapper table th {
+/* .quiz_card_wrapper td,
+th {
+	width: 200px;
+} */
+
+/* .quiz_card_wrapper table th {
 	background-color: #bd4702;
 	color: white;
 }
@@ -206,6 +212,27 @@ td {
 .quiz_card_wrapper table td {
 	background-color: #0277bd;
 	color: white;
+} */
+
+.quiz_card_wrapper table button {
+	cursor: pointer;
+	background-color: #ef5350;
+	color: #ffffff;
+	border: 0;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	padding: 6px 12px;
+	border-radius: 14px;
+}
+
+.quiz_card_wrapper table button span {
+	font-size: 16px;
+	display: inline-flex;
+	vertical-align: top;
+}
+
+.quiz_card_wrapper table button:hover {
+	background-color: #d32f2f;
 }
 
 .quiz_card {
