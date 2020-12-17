@@ -44,7 +44,7 @@
 						<span class="material-icons"> remove_circle </span>
 						Delete Class
 					</button>
-					<button>
+					<button onclick="toggle_contents()" id="page_toggle_btn">
 						<span class="material-icons">people</span>
 						Students
 					</button>
@@ -80,6 +80,18 @@
 					</p>
 					<button type="submit">DELETE CLASS</button>
 				</form>
+			</div>
+			<div class="modal_2">
+				<h3>REMOVE STUDENT</h3>
+				<h3 onclick="toggle_modal_2()">
+					<span class="material-icons">close</span>
+				</h3>
+				<hr />
+				<p id="remove_stu_para"></p>
+				<button id="remove_btn" onclick="deleteStudent()">
+					REMOVE
+				</button>
+				<button onclick="toggle_modal_2()">CANCEL</button>
 			</div>
 		</div>
 		<script src="classroom.js"></script>

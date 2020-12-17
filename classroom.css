@@ -179,6 +179,62 @@ body button:focus {
 	vertical-align: top;
 }
 
+.quiz_card_wrapper h1 {
+	text-align: center;
+	margin: 16px;
+}
+
+.quiz_card_wrapper table {
+	margin: 16px auto;
+	border-collapse: collapse;
+}
+
+.quiz_card_wrapper table,
+th,
+tr,
+td {
+	border: 1px solid black;
+	padding: 8px;
+	text-align: center;
+	background-color: #ffffff;
+}
+
+/* .quiz_card_wrapper td,
+th {
+	width: 200px;
+} */
+
+/* .quiz_card_wrapper table th {
+	background-color: #bd4702;
+	color: white;
+}
+
+.quiz_card_wrapper table td {
+	background-color: #0277bd;
+	color: white;
+} */
+
+.quiz_card_wrapper table button {
+	cursor: pointer;
+	background-color: #ef5350;
+	color: #ffffff;
+	border: 0;
+	font-family: 'Roboto', sans-serif;
+	font-style: normal;
+	padding: 6px 12px;
+	border-radius: 14px;
+}
+
+.quiz_card_wrapper table button span {
+	font-size: 16px;
+	display: inline-flex;
+	vertical-align: top;
+}
+
+.quiz_card_wrapper table button:hover {
+	background-color: #d32f2f;
+}
+
 .quiz_card {
 	background-color: #ffffff;
 	width: 840px;
@@ -270,12 +326,14 @@ body button:focus {
 	visibility: hidden;
 }
 
-.show-modal1 {
+.show-modal1,
+.show-modal2 {
 	opacity: 1;
 	visibility: visible;
 }
 
-.modal_1 {
+.modal_1,
+.modal_2 {
 	width: 80%;
 	max-width: 500px;
 	background-color: #ffffff;
@@ -288,25 +346,29 @@ body button:focus {
 	border-radius: 8px;
 }
 
-.show-modal1 .modal_1 {
+.show-modal1 .modal_1,
+.show-modal2 .modal_2 {
 	opacity: 1;
 	visibility: visible;
 	transform: translate(-50%, 30%);
 }
 
-.modal_1 h3 {
+.modal_1 h3,
+.modal_2 h3 {
 	display: inline-block;
 	margin: 16px 16px 8px;
 }
 
-.modal_1 h3:nth-child(2) {
+.modal_1 h3:nth-child(2),
+.modal_2 h3:nth-child(2) {
 	float: right;
 	cursor: pointer;
 	font-size: 24px;
 	height: 24px;
 }
 
-.modal_1 form {
+.modal_1 form,
+.modal_2 form {
 	margin: 16px;
 }
 
@@ -321,7 +383,8 @@ body button:focus {
 	font-size: 1rem;
 }
 
-.modal_1 form button {
+.modal_1 form button,
+.modal_2 button {
 	float: right;
 	padding: 6px 12px;
 	border: 0;
@@ -336,7 +399,8 @@ body button:focus {
 	margin-bottom: 16px;
 }
 
-.modal_1 form button:hover {
+.modal_1 form button:hover,
+.modal_2 button:hover {
 	background-color: #4d2c90;
 }
 
@@ -369,4 +433,34 @@ body button:focus {
 
 .show_err_info span {
 	font-size: 20px !important;
+}
+
+.modal_2 button {
+	margin: 0 16px 16px 0;
+	font-size: 16px;
+}
+
+#remove_stu_para {
+	margin: 16px;
+}
+
+#remove_stu_para span {
+	font-weight: bold;
+}
+
+#remove_btn {
+	background-color: #ef5350;
+}
+
+#remove_btn:hover {
+	background-color: #d32f2f;
+}
+
+#remove_btn:disabled {
+	opacity: 0.65;
+	cursor: default;
+}
+
+#remove_btn:disabled:hover {
+	background-color: #ef5350;
 }
