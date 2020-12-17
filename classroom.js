@@ -182,6 +182,26 @@ function quiz_card_template(cl) {
 						</div>`;
 }
 
+const fillStudentTable = () => {
+	if (students.length === 0) stu_table = '<h1>No Students in this Class</h1>';
+	else {
+		stu_table =
+			'<h1>STUDENTS</h1><table><tr><th>FIRST NAME</th><th>LAST NAME</th><th>EMAIL</th><th></th></tr>';
+		students.forEach((student, i) => {
+			stu_table += `<tr>
+				<td>${student.FIRST_NAME}</td>
+				<td>${student.LAST_NAME}</td>
+				<td>${student.EMAIL}</td>
+				<td><button onclick="toggle_modal_2(${i})">
+						<span class="material-icons">remove_circle</span>
+						REMOVE STUDENT
+				</button></td>
+			</tr>`;
+		});
+		stu_table += '</table>';
+	}
+};
+
 window.onload = () => {
 	let requestOptions = {
 		method: 'GET',
@@ -238,25 +258,7 @@ window.onload = () => {
 						.then(res => {
 							if (res.STATUS === 1) {
 								students = res.DATA;
-								if (students.length === 0)
-									stu_table =
-										'<h1>No Students in this Class</h1>';
-								else {
-									stu_table =
-										'<h1>STUDENTS</h1><table><tr><th>FIRST NAME</th><th>LAST NAME</th><th>EMAIL</th><th></th></tr>';
-									students.forEach((student, i) => {
-										stu_table += `<tr>
-											<td>${student.FIRST_NAME}</td>
-											<td>${student.LAST_NAME}</td>
-											<td>${student.EMAIL}</td>
-											<td><button onclick="deleteStudent(${i})">
-													<span class="material-icons">remove_circle</span>
-													REMOVE STUDENT
-											</button></td>
-										</tr>`;
-									});
-									stu_table += '</table>';
-								}
+								fillStudentTable();
 							} else {
 								alert(res.MESSAGE);
 								window.location = 'dashboard.html';
@@ -380,6 +382,45 @@ const toggle_contents = () => {
 	}
 };
 
-const deleteStudent = i => {
-	console.log(students[i]);
+let modal2_visible = false;
+let stu_idx;
+const toggle_modal_2 = i => {
+	let modal = document.querySelector('.modal-bg');
+	if (modal2_visible) {
+		modal.classList.remove('show-modal2');
+		modal2_visible = false;
+	} else {
+		let remove_stu_para = document.getElementById('remove_stu_para');
+		remove_stu_para.innerHTML = `Are you sure you want to remove <span>${students[i].FIRST_NAME} ${students[i].LAST_NAME}</span> from <span>${classroom.TITLE}</span>`;
+		stu_idx = i;
+		modal.classList.add('show-modal2');
+		modal2_visible = true;
+	}
+};
+
+const deleteStudent = () => {
+	document.getElementById('remove_btn').disabled = true;
+	console.log(students[stu_idx]);
+	let requestOptions = {
+		method: 'DELETE',
+		mode: 'cors',
+		credentials: 'include'
+	};
+	fetch(
+		`${baseURL}/student//remove?classID=${classID}&studentID=${students[stu_idx].ID}`,
+		requestOptions
+	)
+		.then(result => result.json())
+		.then(res => {
+			alert(res.MESSAGE);
+			if (res.STATUS === 1) {
+				// window.location = 'dashboard.html';
+				students.splice(stu_idx, 1);
+				fillStudentTable();
+				quiz_card_wrapper.innerHTML = stu_table;
+				toggle_modal_2();
+				document.getElementById('remove_btn').disabled = false;
+			}
+		})
+		.catch(error => console.log('error', error));
 };

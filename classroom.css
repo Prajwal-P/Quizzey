@@ -326,12 +326,14 @@ th {
 	visibility: hidden;
 }
 
-.show-modal1 {
+.show-modal1,
+.show-modal2 {
 	opacity: 1;
 	visibility: visible;
 }
 
-.modal_1 {
+.modal_1,
+.modal_2 {
 	width: 80%;
 	max-width: 500px;
 	background-color: #ffffff;
@@ -344,25 +346,29 @@ th {
 	border-radius: 8px;
 }
 
-.show-modal1 .modal_1 {
+.show-modal1 .modal_1,
+.show-modal2 .modal_2 {
 	opacity: 1;
 	visibility: visible;
 	transform: translate(-50%, 30%);
 }
 
-.modal_1 h3 {
+.modal_1 h3,
+.modal_2 h3 {
 	display: inline-block;
 	margin: 16px 16px 8px;
 }
 
-.modal_1 h3:nth-child(2) {
+.modal_1 h3:nth-child(2),
+.modal_2 h3:nth-child(2) {
 	float: right;
 	cursor: pointer;
 	font-size: 24px;
 	height: 24px;
 }
 
-.modal_1 form {
+.modal_1 form,
+.modal_2 form {
 	margin: 16px;
 }
 
@@ -377,7 +383,8 @@ th {
 	font-size: 1rem;
 }
 
-.modal_1 form button {
+.modal_1 form button,
+.modal_2 button {
 	float: right;
 	padding: 6px 12px;
 	border: 0;
@@ -392,7 +399,8 @@ th {
 	margin-bottom: 16px;
 }
 
-.modal_1 form button:hover {
+.modal_1 form button:hover,
+.modal_2 button:hover {
 	background-color: #4d2c90;
 }
 
@@ -425,4 +433,34 @@ th {
 
 .show_err_info span {
 	font-size: 20px !important;
+}
+
+.modal_2 button {
+	margin: 0 16px 16px 0;
+	font-size: 16px;
+}
+
+#remove_stu_para {
+	margin: 16px;
+}
+
+#remove_stu_para span {
+	font-weight: bold;
+}
+
+#remove_btn {
+	background-color: #ef5350;
+}
+
+#remove_btn:hover {
+	background-color: #d32f2f;
+}
+
+#remove_btn:disabled {
+	opacity: 0.65;
+	cursor: default;
+}
+
+#remove_btn:disabled:hover {
+	background-color: #ef5350;
 }
