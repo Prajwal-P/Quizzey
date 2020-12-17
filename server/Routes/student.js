@@ -79,7 +79,7 @@ router.delete('/remove', check, (req, res) => {
 			} else {
 				if (result['affectedRows'] === 1)
 					sendRes(1, res, undefined, 'STUDENT REMOVED SUCCESSFULLY');
-				else sendRes(1, res, undefined, 'STUDENT COULD NOT BE REMOVED');
+				else sendRes(0, res, undefined, 'STUDENT COULD NOT BE REMOVED');
 			}
 		});
 	};
