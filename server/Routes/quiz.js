@@ -36,7 +36,7 @@ router.post('/add', check, (req, res) => {
 
 	const addQuiz = () => {
 		sql = `INSERT INTO TBL_QUIZ(CLASS_ID, TITLE, DESCRIPTION, NO_OF_QUESTIONS, DURATION, MAX_MARKS, START_TIME, END_TIME)
-		VALUES('${data['class_id']}', '${data['quiz_title']}', '${data['quiz_descripition']}', '${data['no_of_questions']}', 
+		VALUES('${data['class_id']}', '${data['quiz_title']}', '${data['quiz_description']}', '${data['no_of_questions']}', 
 		'${data['duration']}', '${data['max_marks']}', '${data['start_time']}', '${data['end_time']}');`;
 		mysqlConnection.query(sql, (err, result) => {
 			if (err) {
@@ -46,10 +46,15 @@ router.post('/add', check, (req, res) => {
 				insertQuestions()
 					.then(msg => {
 						console.log(msg);
-						sendRes(1, res, {
-							QUIZ_ID: quizID,
-							QUIZ_TITLE: data['quiz_title']
-						});
+						sendRes(
+							1,
+							res,
+							{
+								QUIZ_ID: quizID,
+								QUIZ_TITLE: data['quiz_title']
+							},
+							'QUIZ ADDED SUCCESFULLY'
+						);
 					})
 					.catch(err => sendRes(-1, res, err));
 			}
@@ -94,7 +99,7 @@ router.post('/add', check, (req, res) => {
 	if (
 		data['class_id'] &&
 		data['quiz_title'] &&
-		data['quiz_descripition'] &&
+		data['quiz_description'] &&
 		data['duration'] &&
 		data['no_of_questions'] > 0 &&
 		data['max_marks'] &&
@@ -105,6 +110,7 @@ router.post('/add', check, (req, res) => {
 		isTeacher();
 	} else {
 		sendRes(0, res, undefined, 'INSUFFICIENT DATA');
+		console.log(data);
 	}
 });
 
