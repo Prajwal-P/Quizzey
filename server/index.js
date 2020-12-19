@@ -1,11 +1,11 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const user = require('./Routes/user.js');
 const classroom = require('./Routes/classroom.js');
 const student = require('./Routes/student.js');
+const quiz = require('./Routes/quiz.js');
 
 const port = process.env.PORT || 8888;
 
@@ -36,8 +36,8 @@ app.use(function (req, res, next) {
 	next();
 });
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/test', (req, res) => {
 	res.json({
@@ -50,5 +50,6 @@ app.use('/test', (req, res) => {
 app.use('/user', user);
 app.use('/classroom', classroom);
 app.use('/student', student);
+app.use('/quiz', quiz);
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
