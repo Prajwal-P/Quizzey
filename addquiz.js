@@ -1,3 +1,5 @@
+let no_of_questions = 1;
+
 let menu_visible = false;
 function toggle_dropdown() {
 	let dd = document.querySelector('.dd_wrapper');
@@ -14,7 +16,7 @@ function addQuestion() {
 	let node = document.createElement('div');
 	node.className = 'question_options';
 	node.innerHTML = `<label for="quetion">Question : </label>
-	<span class="material-icons">delete</span>
+	<span id="delete_btn" class="material-icons" onclick="deleteQuestion(this)">delete</span>
 	<input class="question" type="text" name="question" required>
 	<label for="mark">Mark(s) : </label>
 	<input class="question" type="number" style="width: 100px;" name="mark" required>
@@ -30,6 +32,14 @@ function addQuestion() {
 	<input class="txt_field" type="text" name="option_4" required>`;
 
 	document.getElementById('addQuizForm').appendChild(node);
+	no_of_questions++;
 }
 
-function deleteQuestion() {}
+function deleteQuestion(e) {
+	if (no_of_questions == 1) {
+		alert('MINIMUM NUMBER OF QUESTION SHOULD BE THERE TO CREATE A QUIZ');
+	} else {
+		e.parentNode.parentNode.removeChild(e.parentNode);
+		no_of_questions--;
+	}
+}
