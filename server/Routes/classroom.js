@@ -303,7 +303,9 @@ router.delete('/delete/:classID', check, (req, res) => {
 			if (err) {
 				sendRes(-1, res);
 			} else {
-				sendRes(1, res, undefined, 'CLASS DELETED SUCCESSFULLY');
+				if (result['affectedRows'] === 1)
+					sendRes(1, res, undefined, 'CLASS DELETED SUCCESSFULLY');
+				else sendRes(0, res, undefined, 'CLASS COULD NOT BE REMOVED');
 			}
 		});
 	};
