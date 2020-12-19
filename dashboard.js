@@ -100,7 +100,8 @@ createClassForm.addEventListener('submit', e => {
 				// Redirect to classroom.html/id
 				window.location = `classroom.html?classID=${res.DATA['classID']}`;
 			}
-		});
+		})
+		.catch(error => console.log('error', error));
 });
 
 let modal2_visible = false;
@@ -138,7 +139,8 @@ joinClassForm.addEventListener('submit', e => {
 				// Redirect to classroom.html/id
 				window.location = `classroom.html?classID=${res.DATA['classID']}`;
 			}
-		});
+		})
+		.catch(error => console.log('error', error));
 });
 
 let openClassroom = id => {
