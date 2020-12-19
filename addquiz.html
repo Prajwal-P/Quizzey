@@ -33,58 +33,37 @@
 		</div>
 	</div>
 	<div class="root">
-		<div class="quiz_data">
-			<h1>ADD QUIZ</h1>
-			<input class="one_tb" type="text" name="title" placeholder="Title" required>
-			<input class="one_tb" type="text" name="description" placeholder="Description" required>
-			<input class="two_tb" style="margin: 0px 36px 0px 80px;" type="number" name="duration" placeholder="Duration in Minutes" required>
-			<input class="two_tb" type="number" name="max_marks" placeholder="Max Marks" required>
-			<input class="one_tb" name="start _time" placeholder="Start Date and Time" onfocus="(this.type='datetime-local')" onblur="(this.type='datetime')" required>
-			<input class="one_tb" name="end_time" placeholder="End Date and Time" onfocus="(this.type='datetime-local')" onblur="(this.type='datetime')" required>
-		</div>
-		<div class="question_options">
-			<div class="question">
-				<label for="quetion">Question : </label>
-				<span class="material-icons">delete</span>
-				<input type="text" name="question">
-				<label for="mark">Mark(s) : </label>
-				<input type="number" style="width: 100px;" name="mark">
+		<form id="addQuizForm">
+			<div class="quiz_data">
+				<h1>ADD QUIZ</h1>
+				<input class="one_tb" type="text" name="title" placeholder="Title" required>
+				<input class="one_tb" type="text" name="description" placeholder="Description" required>
+				<input class="two_tb" style="margin: 0px 36px 0px 80px;" type="number" name="duration" placeholder="Duration in Minutes" required>
+				<input class="two_tb" type="number" name="max_marks" placeholder="Max Marks" required>
+				<input class="one_tb" name="start _time" placeholder="Start Date and Time" onfocus="(this.type='datetime-local')" onblur="(this.type='datetime')" required>
+				<input class="one_tb" name="end_time" placeholder="End Date and Time" onfocus="(this.type='datetime-local')" onblur="(this.type='datetime')" required>
 			</div>
-			<div class="options">
-				<label for="options">Options : </label><br>
-				<input class="checks" type="checkbox" name="option_1">
-				<input class="txt_field" style="margin: 4px 16px 0 0;" type="text" name="option_1">
-				<input class="checks" type="checkbox" name="option_2">
-				<input class="txt_field" type="text" name="option_2">
-				<input class="checks" type="checkbox" name="option_3">
-				<input class="txt_field" style="margin-right: 16px;" type="text" name="option_3">
-				<input class="checks" type="checkbox" name="option_4">
-				<input class="txt_field" type="text" name="option_4">
+			<div class="question_options">
+					<label for="quetion">Question : </label>
+					<span id="delete_btn" class="material-icons" onclick="deleteQuestion(this)">delete</span>
+					<input class="question" type="text" name="question" required>
+					<label for="mark">Mark(s) : </label>
+					<input class="question" type="number" style="width: 100px;" name="mark" required>
+					<br>
+					<label for="options">Options : </label><br>
+					<input class="checks" type="radio" name="option_1" required>
+					<input class="txt_field" style="margin: 4px 16px 0 0;" type="text" name="option_1" required>
+					<input class="checks" type="radio" name="option_1">
+					<input class="txt_field" type="text" name="option_2" required>
+					<input class="checks" type="radio" name="option_1">
+					<input class="txt_field" style="margin-right: 16px;" type="text" name="option_3" required>
+					<input class="checks" type="radio" name="option_1">
+					<input class="txt_field" type="text" name="option_4" required>
 			</div>
-		</div>
-		<div class="question_options">
-			<div class="question">
-				<label for="quetion">Question : </label>
-				<span class="material-icons">delete</span>
-				<input type="text" name="question">
-				<label for="mark">Mark(s) : </label>
-				<input type="number" style="width: 100px;" name="mark">
-			</div>
-			<div class="options">
-				<label for="options">Options : </label><br>
-				<input class="checks" type="checkbox" name="option_1">
-				<input class="txt_field" style="margin: 4px 16px 0 0;" type="text" name="option_1">
-				<input class="checks" type="checkbox" name="option_2">
-				<input class="txt_field" type="text" name="option_2">
-				<input class="checks" type="checkbox" name="option_3">
-				<input class="txt_field" style="margin-right: 16px;" type="text" name="option_3">
-				<input class="checks" type="checkbox" name="option_4">
-				<input class="txt_field" type="text" name="option_4">
-			</div>
-		</div>
+		</form>
 		<div class="addquiz_btns">
-			<button>ADD QUESTION</button>
-			<button>SUBMIT</button>
+			<button type="button" onclick="addQuestion()">ADD QUESTION</button>
+			<button type="submit" form="addQuizForm">SUBMIT</button>
 		</div>
 	</div>
 	<script src="addquiz.js"></script>
