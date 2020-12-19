@@ -114,4 +114,43 @@ router.post('/add', check, (req, res) => {
 	}
 });
 
+router.delete('/remove', check, (req, res) => {
+	const classID = req.query['classID'];
+	const quizID = req.query['quizID'];
+	const userID = req.cookies.userId;
+
+	const isTeacher = () => {
+		sql = `SELECT * FROM TBL_CLASSROOM WHERE ID='${classID}' AND TEACHER_ID='${userID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else deleteQuiz();
+			}
+		});
+	};
+
+	const deleteQuiz = () => {
+		sql = `DELETE FROM TBL_QUIZ WHERE ID='${quizID}' AND CLASS_ID='${classID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result['affectedRows'] === 1)
+					sendRes(1, res, undefined, 'QUIZ DELETED SUCCESSFULLY');
+				else sendRes(0, res, undefined, 'QUIZ COULD NOT BE REMOVED');
+			}
+		});
+	};
+
+	isTeacher();
+});
+
 module.exports = router;
