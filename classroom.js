@@ -5,7 +5,7 @@ let classroom, students;
 let page_toggle_btn, quiz_card_wrapper;
 let stu_table = '<h1>Loading...</h1>';
 
-function quiz_card_template(cl) {
+function quiz_card_template(cl, i) {
 	cl.START_TIME = new Date(cl.START_TIME);
 	cl.END_TIME = new Date(cl.END_TIME);
 
@@ -37,7 +37,7 @@ function quiz_card_template(cl) {
 		'DEC'
 	];
 	if (classroom.CLASS_CODE) {
-		id1 = `<span class="material-icons delete_btn">delete</span>`;
+		id1 = `<span class="material-icons delete_btn" onclick="toggle_modal_3(${cl.ID} ,${i})">delete</span>`;
 		id2 = 'Open Quiz';
 		id3 =
 			'Start Time: ' +
@@ -382,6 +382,55 @@ const toggle_contents = () => {
 	}
 };
 
+let modal3_visible = false;
+let quiz_id, quiz_idx;
+const toggle_modal_3 = (q_id, idx) => {
+	let modal = document.querySelector('.modal-bg');
+	if (modal3_visible) {
+		modal.classList.remove('show-modal3');
+		modal3_visible = false;
+	} else {
+		let remove_quiz_para = document.getElementById('remove_quiz_para');
+		remove_quiz_para.innerHTML = `Are you sure you want to remove <span>${classroom.QUIZZES[idx]['TITLE']}</span> from <span>${classroom.TITLE}</span>`;
+		quiz_id = q_id;
+		quiz_idx = idx;
+		modal.classList.add('show-modal3');
+		modal3_visible = true;
+	}
+};
+
+const deleteQuiz = () => {
+	document.getElementById('remove_quiz_btn').disabled = true;
+	// console.log(students[stu_idx]);
+	let requestOptions = {
+		method: 'DELETE',
+		mode: 'cors',
+		credentials: 'include'
+	};
+	fetch(
+		`${baseURL}/quiz/remove?classID=${classID}&quizID=${quiz_id}`,
+		requestOptions
+	)
+		.then(result => result.json())
+		.then(res => {
+			alert(res.MESSAGE);
+			document.getElementById('remove_quiz_btn').disabled = false;
+			if (res.STATUS === 1) {
+				// window.location = 'dashboard.html';
+				classroom.QUIZZES.splice(quiz_idx, 1);
+				fillStudentTable();
+				if (classroom.QUIZZES.length === 0) {
+					quiz_card_wrapper.innerHTML = `<h1>NO QUIZZES IN THIS CLASS</h1>`;
+				} else {
+					quiz_card_wrapper.innerHTML = `
+				${classroom.QUIZZES.map(quiz_card_template).join('')}`;
+				}
+				toggle_modal_3();
+			}
+		})
+		.catch(error => console.log('error', error));
+};
+
 let modal2_visible = false;
 let stu_idx;
 const toggle_modal_2 = i => {
@@ -400,26 +449,26 @@ const toggle_modal_2 = i => {
 
 const deleteStudent = () => {
 	document.getElementById('remove_btn').disabled = true;
-	console.log(students[stu_idx]);
+	// console.log(students[stu_idx]);
 	let requestOptions = {
 		method: 'DELETE',
 		mode: 'cors',
 		credentials: 'include'
 	};
 	fetch(
-		`${baseURL}/student//remove?classID=${classID}&studentID=${students[stu_idx].ID}`,
+		`${baseURL}/student/remove?classID=${classID}&studentID=${students[stu_idx].ID}`,
 		requestOptions
 	)
 		.then(result => result.json())
 		.then(res => {
 			alert(res.MESSAGE);
+			document.getElementById('remove_btn').disabled = false;
 			if (res.STATUS === 1) {
 				// window.location = 'dashboard.html';
 				students.splice(stu_idx, 1);
 				fillStudentTable();
 				quiz_card_wrapper.innerHTML = stu_table;
 				toggle_modal_2();
-				document.getElementById('remove_btn').disabled = false;
 			}
 		})
 		.catch(error => console.log('error', error));

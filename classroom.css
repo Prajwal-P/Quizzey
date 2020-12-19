@@ -327,13 +327,15 @@ th {
 }
 
 .show-modal1,
-.show-modal2 {
+.show-modal2,
+.show-modal3 {
 	opacity: 1;
 	visibility: visible;
 }
 
 .modal_1,
-.modal_2 {
+.modal_2,
+.modal_3 {
 	width: 80%;
 	max-width: 500px;
 	background-color: #ffffff;
@@ -347,28 +349,30 @@ th {
 }
 
 .show-modal1 .modal_1,
-.show-modal2 .modal_2 {
+.show-modal2 .modal_2,
+.show-modal3 .modal_3 {
 	opacity: 1;
 	visibility: visible;
 	transform: translate(-50%, 30%);
 }
 
 .modal_1 h3,
-.modal_2 h3 {
+.modal_2 h3,
+.modal_3 h3 {
 	display: inline-block;
 	margin: 16px 16px 8px;
 }
 
 .modal_1 h3:nth-child(2),
-.modal_2 h3:nth-child(2) {
+.modal_2 h3:nth-child(2),
+.modal_3 h3:nth-child(2) {
 	float: right;
 	cursor: pointer;
 	font-size: 24px;
 	height: 24px;
 }
 
-.modal_1 form,
-.modal_2 form {
+.modal_1 form {
 	margin: 16px;
 }
 
@@ -384,7 +388,8 @@ th {
 }
 
 .modal_1 form button,
-.modal_2 button {
+.modal_2 button,
+.modal_3 button {
 	float: right;
 	padding: 6px 12px;
 	border: 0;
@@ -400,7 +405,8 @@ th {
 }
 
 .modal_1 form button:hover,
-.modal_2 button:hover {
+.modal_2 button:hover,
+.modal_3 button:hover {
 	background-color: #4d2c90;
 }
 
@@ -435,32 +441,39 @@ th {
 	font-size: 20px !important;
 }
 
-.modal_2 button {
+.modal_2 button,
+.modal_3 button {
 	margin: 0 16px 16px 0;
 	font-size: 16px;
 }
 
-#remove_stu_para {
+#remove_stu_para,
+#remove_quiz_para {
 	margin: 16px;
 }
 
-#remove_stu_para span {
+#remove_stu_para span,
+#remove_quiz_para span {
 	font-weight: bold;
 }
 
-#remove_btn {
+#remove_btn,
+#remove_quiz_btn {
 	background-color: #ef5350;
 }
 
-#remove_btn:hover {
+#remove_btn:hover,
+#remove_quiz_btn:hover {
 	background-color: #d32f2f;
 }
 
-#remove_btn:disabled {
+#remove_btn:disabled,
+#remove_quiz_btn:disabled {
 	opacity: 0.65;
 	cursor: default;
 }
 
-#remove_btn:disabled:hover {
+#remove_btn:disabled:hover,
+#remove_quiz_btn:disabled:hover {
 	background-color: #ef5350;
 }
