@@ -424,3 +424,7 @@ const deleteStudent = () => {
 		})
 		.catch(error => console.log('error', error));
 };
+
+const toAddQuiz = () => {
+	window.location = `addquiz.html?classID=${classID}`;
+};
