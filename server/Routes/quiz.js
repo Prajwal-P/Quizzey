@@ -237,4 +237,88 @@ router.post('/submit', check, (req, res) => {
 	else sendRes(0, res, undefined, 'INSUFFICIENT DATA');
 });
 
+router.get('/', check, (req, res) => {
+	const classID = req.query['classID'];
+	const quizID = req.query['quizID'];
+	const userID = req.cookies.userId;
+	let data;
+
+	const isStudent = () => {
+		sql = `SELECT * FROM TBL_STUDENT_CLASSROOM WHERE STUDENT_ID='${userID}' AND CLASS_ID='${classID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else {
+					sql = `SELECT ID AS QUIZ_ID, TITLE, DESCRIPTION, NO_OF_QUESTIONS, DURATION
+					FROM TBL_QUIZ WHERE ID='${quizID}' AND CLASS_ID='${classID}';`;
+					mysqlConnection.query(sql, getQuiz);
+				}
+			}
+		});
+	};
+
+	let questions = [];
+	const getQuiz = (err, result) => {
+		if (err) {
+			sendRes(-1, res);
+		} else {
+			if (result.length === 0) {
+				sendRes(
+					0,
+					res,
+					undefined,
+					'YOU ARE NOT SUPPOSED TO BE IN THIS QUIZ'
+				);
+			} else {
+				data = result[0];
+				sql = `SELECT Q.ID AS QUESTION_ID, Q.QUESTION, Q.MARK FROM TBL_QUESTION Q WHERE Q.QUIZ_ID = '${quizID}';`;
+				mysqlConnection.query(sql, getQuestions);
+				// sendRes(1, res, data);
+			}
+		}
+	};
+
+	const getQuestions = (err, result) => {
+		if (err) {
+			sendRes(-1, res);
+		} else {
+			if (result.length === 0) {
+				sendRes(
+					0,
+					res,
+					undefined,
+					'THERE ARE NO QUESTIONS IN THIS QUIZ'
+				);
+			} else {
+				questions = result;
+				questions.map((ele, i) => {
+					sql = `SELECT O.ID AS OPTION_ID, O.CHOICE FROM TBL_OPTION O WHERE O.QUESTION_ID = '${ele['QUESTION_ID']}';`;
+					mysqlConnection.query(sql, (e, r) => {
+						if (e) {
+							sendRes(-1, res);
+						} else {
+							ele['OPTIONS'] = r;
+						}
+						if (i === questions.length - 1) {
+							data['QUESTIONS'] = questions;
+							sendRes(1, res, data);
+						}
+					});
+				});
+			}
+		}
+	};
+
+	if (classID && quizID) isStudent();
+	else sendRes(0, res, undefined, 'INSUFFICIENT DATA');
+});
+
 module.exports = router;
