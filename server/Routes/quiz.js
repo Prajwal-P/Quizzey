@@ -110,7 +110,6 @@ router.post('/add', check, (req, res) => {
 		isTeacher();
 	} else {
 		sendRes(0, res, undefined, 'INSUFFICIENT DATA');
-		console.log(data);
 	}
 });
 
@@ -151,6 +150,91 @@ router.delete('/remove', check, (req, res) => {
 	};
 
 	isTeacher();
+});
+
+router.post('/submit', check, (req, res) => {
+	const userID = req.cookies.userId;
+	let score = 0;
+
+	const isStudent = () => {
+		sql = `SELECT * FROM TBL_STUDENT_CLASSROOM WHERE STUDENT_ID='${userID}' AND CLASS_ID='${req.body['classID']}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else checkQuiz();
+			}
+		});
+	};
+
+	const checkQuiz = () => {
+		sql = `SELECT * FROM TBL_QUIZ WHERE ID='${req.body['quizID']}' AND CLASS_ID='${req.body['classID']}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else {
+					sql = `SELECT Q.ID AS QUESTION_ID, O.ID AS OPTION_ID, Q.MARK
+						FROM TBL_QUESTION Q, TBL_OPTION O
+						WHERE Q.QUIZ_ID = '${req.body['quizID']}' AND
+						Q.ID = O.QUESTION_ID AND
+						O.IS_CORRECT = 1`;
+					mysqlConnection.query(sql, submitQuiz);
+					// submitQuiz();
+				}
+			}
+		});
+	};
+
+	const submitQuiz = (err, result) => {
+		if (err) {
+			sendRes(-1, res);
+		} else {
+			if (result.length === 0) {
+				sendRes(0, res, undefined, 'QUIZ COULD NOT BE SUBMITTED');
+			} else {
+				result.map(ele => {
+					// console.log(req.body['solutions'][ele['QUESTION_ID']]);
+					if (
+						req.body['solutions'][ele['QUESTION_ID']] ===
+						ele['OPTION_ID']
+					)
+						score += ele['MARK'];
+				});
+				insertScore();
+			}
+		}
+	};
+
+	const insertScore = () => {
+		sql = `INSERT INTO TBL_SCORE(STUDENT_ID, QUIZ_ID, MARKS) VALUES('${userID}', '${req.body['quizID']}', '${score}');`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				console.log(`Score ID: ${result['insertId']}`);
+				sendRes(1, res, undefined, 'QUIZ SUBMITTED SUCCESSFULLY');
+			}
+		});
+	};
+
+	if (req.body['classID'] && req.body['quizID'] && req.body['solutions'])
+		isStudent();
+	else sendRes(0, res, undefined, 'INSUFFICIENT DATA');
 });
 
 module.exports = router;
