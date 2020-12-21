@@ -104,6 +104,7 @@ const renderTimer = () => {
 		seconds = seconds < 10 ? '0' + seconds : seconds;
 		countDown.innerHTML = `${hours} : ${minutes} : ${seconds}`;
 		if (time <= 0) {
+			toggle_modal_2();
 			clearInterval(timer);
 			submitQuiz();
 		}
@@ -152,6 +153,10 @@ const renderQuestion = qusetionIdx => {
 	`;
 
 	document.getElementById('question').innerHTML = questionTemplate;
+	if (answers[quizzes['QUESTIONS'][qusetionIdx]['QUESTION_ID']] !== undefined)
+		document.getElementById(
+			answers[quizzes['QUESTIONS'][qusetionIdx]['QUESTION_ID']]
+		).checked = true;
 };
 
 const getAnswer = btn => {
@@ -182,7 +187,43 @@ const prevQuestion = () => {
 	}
 };
 
+let modal1_visible = false;
+function toggle_modal_1() {
+	let modal = document.querySelector('.modal-bg');
+	if (modal1_visible) {
+		modal.classList.remove('show-modal1');
+		modal1_visible = false;
+	} else {
+		document.getElementById(
+			'submit_quiz_para'
+		).innerHTML = `You have answered <span>${
+			Object.keys(answers).length
+		} out of ${no_of_questions}</span>`;
+		modal.classList.add('show-modal1');
+		modal1_visible = true;
+	}
+}
+
+let modal2_visible = false;
+function toggle_modal_2() {
+	let modal = document.querySelector('.modal-bg');
+	if (modal2_visible) {
+		modal.classList.remove('show-modal2');
+		modal2_visible = false;
+	} else {
+		document.getElementById(
+			'modal_2_para'
+		).innerHTML = `Oops, time's up and You have answered <span>${
+			Object.keys(answers).length
+		} out of ${no_of_questions}</span>`;
+		modal.classList.add('show-modal2');
+		modal2_visible = true;
+	}
+}
+
 const submitQuiz = () => {
+	let submit_btn = document.getElementById('submit_quiz_btn');
+	submit_btn.disabled = true;
 	let data = {
 		classID: classID,
 		quizID: quizID,
@@ -203,6 +244,7 @@ const submitQuiz = () => {
 		.then(result => result.json())
 		.then(res => {
 			alert(res.MESSAGE);
+			submit_btn.disabled = false;
 			if (res.STATUS === 1) {
 				window.location = `classroom.html?classID=${classID}`;
 			}
