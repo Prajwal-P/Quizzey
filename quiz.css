@@ -133,13 +133,15 @@ body button:focus {
 	flex-direction: column;
 }
 
-.question {
+#question {
 	padding: 30px;
-	/* display: block;
-	margin-bottom: auto; */
 }
 
-.question p {
+#question h1 {
+	text-align: center;
+}
+
+#question p {
 	margin: 20px 0 50px;
 }
 
@@ -163,30 +165,45 @@ body button:focus {
 	font-family: 'Roboto', sans-serif !important;
 	font-style: normal;
 	cursor: pointer;
-	transition: background-color 0.25s ease-in;
+	transition: background-color 0.25s ease-out;
 }
 
-.question_btns button:nth-child(1) {
+#prev-btn,
+#next-btn {
 	background-color: #9bc257;
 }
 
-.question_btns button:nth-child(2) {
+#prev-btn:hover,
+#next-btn:hover {
+	background-color: #8bae4e;
+}
+
+#prev-btn:disabled,
+#next-btn:disabled {
+	opacity: 0.65;
+	cursor: default;
+	color: #000000;
+}
+
+#prev-btn:disabled:hover,
+#next-btn:disabled:hover {
+	background-color: #9bc257;
+}
+
+#submit-btn {
 	background-color: #7e57c2;
 	color: white;
 }
 
-.question_btns button:nth-child(3) {
-	background-color: #9bc257;
-}
-
-.question_btns button:nth-child(1):hover {
-	background-color: #8bae4e;
-}
-
-.question_btns button:nth-child(2):hover {
+#submit-btn:hover {
 	background-color: #714eae;
 }
 
-.question_btns button:nth-child(3):hover {
-	background-color: #8bae4e;
+#submit-btn:disabled {
+	opacity: 0.65;
+	cursor: default;
+}
+
+#submit-btn:disabled:hover {
+	background-color: #7e57c2;
 }
