@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.gstatic.com" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
 			rel="stylesheet"
@@ -13,25 +13,38 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="quiz.css" />
-	<title>Quizzey</title>
-</head>
-<body>
-	<div class="nav_bar">
-		<h2>QUIZZEY</h2>
-		<div class="user_name" onclick="toggle_dropdown()">
-			<h2 id="name">FIRST_NAME</h2>
-			<img
-				src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg"
-				alt="Profile Picture"
-			/>
+		<title>Quizzey</title>
+	</head>
+	<body>
+		<div class="nav_bar">
+			<h2>QUIZZEY</h2>
+			<div class="user_name" onclick="toggle_dropdown()">
+				<h2 id="name">FIRST_NAME</h2>
+				<img
+					src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg"
+					alt="Profile Picture"
+				/>
+			</div>
+			<div class="dd_wrapper" id="dropdown">
+				<button>Classroom</button>
+				<button>Profile</button>
+				<hr />
+				<button onclick="signOut()">Sign Out</button>
+			</div>
 		</div>
-		<div class="dd_wrapper" id="dropdown">
-			<button>Classroom</button>
-			<button>Profile</button>
-			<hr />
-			<button onclick="signOut()">Sign Out</button>
+		<div class="timer">
+			<p id="countdown"></p>
 		</div>
-	</div>
-	<script src="quiz.js"></script>
-</body>
+		<div class="root">
+			<div id="question">
+				<h1>Loading...</h1>
+			</div>
+			<div class="question_btns">
+				<button id="prev-btn" onclick="prevQuestion()">PREVIOUS</button>
+				<button id="submit-btn" onclick="submitQuiz()">SUBMIT</button>
+				<button id="next-btn" onclick="nextQuestion()">NEXT</button>
+			</div>
+		</div>
+		<script src="quiz.js"></script>
+	</body>
 </html>

@@ -3,7 +3,7 @@ let baseURL = 'http://127.0.0.1:8888';
 let all_classrooms = '';
 
 window.onload = () => {
-	var requestOptions = {
+	let requestOptions = {
 		method: 'GET',
 		mode: 'cors',
 		credentials: 'include'

@@ -93,7 +93,7 @@ function quiz_card_template(cl, i) {
 					'$1$3'
 				);
 			id5 = 'disabled';
-		} else if (cl.SCORE) {
+		} else if (cl.SCORE !== undefined) {
 			// Test already taken
 			if (cur_time < cl.END_TIME) {
 				// Do not show score, Disable test button
@@ -136,6 +136,7 @@ function quiz_card_template(cl, i) {
 				// Enable take test button
 				id3 = 'Duration: ' + cl.DURATION + ' min';
 				id4 = 'No. of Questions: ' + cl.NO_OF_QUESTIONS;
+				id5 = `onclick="(() => window.location = 'quiz.html?classID=${classID}&quizID=${cl.ID}')()"`;
 			} else {
 				// Test Expired and disable button
 				id2 = 'Test Expired';
