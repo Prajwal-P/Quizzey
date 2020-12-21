@@ -110,14 +110,16 @@ body button:focus {
 .timer {
 	width: 100px;
 	padding: 10px;
-	background-color: #6cc970;
+	background-color: #a5d6a7;
 	border-radius: 8px;
+	border: 1px solid rgba(46, 125, 50, 0.4);
 	text-align: center;
 	margin: 100px auto 0;
 }
 
 .timer p {
 	color: #2e7d32;
+	font-weight: bold;
 }
 
 .root {
@@ -126,19 +128,30 @@ body button:focus {
 	background-color: white;
 	margin: 50px auto 0;
 	border-radius: 8px;
+	/* position: relative; */
+	display: flex;
+	flex-direction: column;
 }
 
 .question {
 	padding: 30px;
+	/* display: block;
+	margin-bottom: auto; */
 }
 
 .question p {
 	margin: 20px 0 50px;
 }
 
+.option {
+	margin-bottom: 16px;
+}
+
 .question_btns {
+	/* position: absolute; */
 	display: flex;
 	justify-content: space-around;
+	margin: auto 0 30px;
 }
 
 .question_btns button {
