@@ -208,10 +208,9 @@ router.post('/submit', check, (req, res) => {
 				sendRes(0, res, undefined, 'QUIZ COULD NOT BE SUBMITTED');
 			} else {
 				result.map(ele => {
-					// console.log(req.body['solutions'][ele['QUESTION_ID']]);
 					if (
-						req.body['solutions'][ele['QUESTION_ID']] ===
-						ele['OPTION_ID']
+						parseInt(req.body['solutions'][ele['QUESTION_ID']]) ===
+						parseInt(ele['OPTION_ID'])
 					)
 						score += ele['MARK'];
 				});
@@ -226,7 +225,7 @@ router.post('/submit', check, (req, res) => {
 			if (err) {
 				sendRes(-1, res);
 			} else {
-				console.log(`Score ID: ${result['insertId']}`);
+				// console.log(`Score ID: ${result['insertId']}`);
 				sendRes(1, res, undefined, 'QUIZ SUBMITTED SUCCESSFULLY');
 			}
 		});
