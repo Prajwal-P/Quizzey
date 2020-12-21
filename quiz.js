@@ -153,6 +153,10 @@ const renderQuestion = qusetionIdx => {
 	`;
 
 	document.getElementById('question').innerHTML = questionTemplate;
+	if (answers[quizzes['QUESTIONS'][qusetionIdx]['QUESTION_ID']] !== undefined)
+		document.getElementById(
+			answers[quizzes['QUESTIONS'][qusetionIdx]['QUESTION_ID']]
+		).checked = true;
 };
 
 const getAnswer = btn => {
