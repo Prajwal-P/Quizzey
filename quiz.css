@@ -145,15 +145,6 @@ body button:focus {
 	background-color: #714eae;
 }
 
-#submit-btn:disabled {
-	opacity: 0.65;
-	cursor: default;
-}
-
-#submit-btn:disabled:hover {
-	background-color: #7e57c2;
-}
-
 .modal-bg {
 	position: fixed;
 	top: 0;
@@ -240,4 +231,13 @@ body button:focus {
 
 #cancle-btn:hover {
 	background-color: #d32f2f;
+}
+
+#submit_quiz_btn:disabled {
+	opacity: 0.65;
+	cursor: default;
+}
+
+#submit_quiz_btn:disabled:hover {
+	background-color: #7e57c2;
 }
