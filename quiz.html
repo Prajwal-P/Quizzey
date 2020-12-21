@@ -18,18 +18,12 @@
 	<body>
 		<div class="nav_bar">
 			<h2>QUIZZEY</h2>
-			<div class="user_name" onclick="toggle_dropdown()">
+			<div class="user_name">
 				<h2 id="name">FIRST_NAME</h2>
 				<img
 					src="https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg"
 					alt="Profile Picture"
 				/>
-			</div>
-			<div class="dd_wrapper" id="dropdown">
-				<button>Classroom</button>
-				<button>Profile</button>
-				<hr />
-				<button onclick="signOut()">Sign Out</button>
 			</div>
 		</div>
 		<div class="timer">
@@ -41,8 +35,33 @@
 			</div>
 			<div class="question_btns">
 				<button id="prev-btn" onclick="prevQuestion()">PREVIOUS</button>
-				<button id="submit-btn" onclick="submitQuiz()">SUBMIT</button>
+				<button id="submit-btn" onclick="toggle_modal_1()">
+					SUBMIT
+				</button>
 				<button id="next-btn" onclick="nextQuestion()">NEXT</button>
+			</div>
+		</div>
+		<div class="modal-bg">
+			<div class="modal_1">
+				<h3>SUBMIT QUIZ</h3>
+				<h3 onclick="toggle_modal_1()">
+					<span class="material-icons">close</span>
+				</h3>
+				<hr />
+				<p id="submit_quiz_para"></p>
+				<br />
+				<p>Are you sure you want to submit?</p>
+				<button id="submit_quiz_btn" onclick="submitQuiz()">
+					SUBMIT
+				</button>
+				<button id="cancle-btn" onclick="toggle_modal_1()">
+					CANCEL
+				</button>
+			</div>
+			<div class="modal_2">
+				<h3>SUBMIT QUIZ</h3>
+				<hr />
+				<p id="modal_2_para"></p>
 			</div>
 		</div>
 		<script src="quiz.js"></script>
