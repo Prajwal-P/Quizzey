@@ -120,3 +120,27 @@ function deleteQuestion(e) {
 		no_of_questions--;
 	}
 }
+
+const toDashboard = () => {
+	window.location = './dashboard.html';
+};
+
+const signOut = () => {
+	sessionStorage.clear();
+
+	let requestOptions = {
+		method: 'GET',
+		mode: 'cors',
+		credentials: 'include'
+	};
+	fetch(`${baseURL}/user/signOut`, requestOptions)
+		.then(result => result.json())
+		.then(res => {
+			if (res.STATUS === 1) {
+				window.location = 'signIn.html';
+			} else {
+				alert(res.MESSAGE);
+			}
+		})
+		.catch(error => console.log('error', error));
+};
