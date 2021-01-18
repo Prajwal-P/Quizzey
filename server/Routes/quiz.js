@@ -320,4 +320,76 @@ router.get('/', check, (req, res) => {
 	else sendRes(0, res, undefined, 'INSUFFICIENT DATA');
 });
 
+router.get('/results', check, (req, res) => {
+	let classID;
+	const quizID = req.query['quizID'];
+	const userID = req.cookies.userId;
+
+	const getClassID = () => {
+		sql = `SELECT CLASS_ID FROM TBL_QUIZ WHERE ID = '${quizID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else {
+					classID = result[0]['CLASS_ID'];
+					console.log(classID);
+					isTeacher();
+				}
+			}
+		});
+	};
+
+	const isTeacher = () => {
+		sql = `SELECT * FROM TBL_CLASSROOM WHERE ID='${classID}' AND TEACHER_ID='${userID}';`;
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				if (result.length === 0) {
+					sendRes(
+						0,
+						res,
+						undefined,
+						'YOU ARE NOT AUTHORISED FOR THIS ACTION'
+					);
+				} else getData();
+			}
+		});
+	};
+
+	const getData = () => {
+		sql = `SELECT T1.ID, T1.FIRST_NAME, T1.LAST_NAME, T1.EMAIL, T2.MARKS FROM 
+			(SELECT U.ID, U.FIRST_NAME, U.LAST_NAME, U.EMAIL 
+			FROM TBL_USER U, TBL_STUDENT_CLASSROOM SC
+			WHERE U.ID = SC.STUDENT_ID AND
+			SC.CLASS_ID = '${classID}') T1
+			LEFT JOIN 
+			(SELECT S.STUDENT_ID, S.MARKS
+			FROM TBL_SCORE S
+			WHERE S.QUIZ_ID = '${quizID}') T2
+			ON T1.ID = T2.STUDENT_ID`;
+
+		mysqlConnection.query(sql, (err, result) => {
+			if (err) {
+				sendRes(-1, res);
+			} else {
+				for (let row of result) {
+					if (row['MARKS'] === null) row['MARKS'] = 'NA';
+				}
+				sendRes(1, res, result);
+			}
+		});
+	};
+
+	getClassID();
+});
+
 module.exports = router;
