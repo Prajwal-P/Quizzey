@@ -1,12 +1,21 @@
 let baseURL = 'http://127.0.0.1:8888';
 
+let classID = window.location.search
+	.substring(1)
+	.split('&')
+	.map(ele => ele.split('='))[0][1];
+let quizID = window.location.search
+	.substring(1)
+	.split('&')
+	.map(ele => ele.split('='))[1][1];
+
 let quizzes = '<h1>Loading...</h1>';
 let no_of_questions = -1,
 	current_question = -1,
 	duration = -1,
 	answers = {};
 
-const checkUser = () => {
+window.onload = () => {
 	let requestOptions = {
 		method: 'GET',
 		mode: 'cors',
@@ -60,17 +69,6 @@ const getQuiz = () => {
 			});
 	} else window.location = 'signIn.html';
 };
-
-let classID = window.location.search
-	.substring(1)
-	.split('&')
-	.map(ele => ele.split('='))[0][1];
-let quizID = window.location.search
-	.substring(1)
-	.split('&')
-	.map(ele => ele.split('='))[1][1];
-
-checkUser();
 
 let menu_visible = false;
 function toggle_dropdown() {
