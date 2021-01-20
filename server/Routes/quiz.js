@@ -324,9 +324,10 @@ router.get('/results', check, (req, res) => {
 	let classID;
 	const quizID = req.query['quizID'];
 	const userID = req.cookies.userId;
+	let data = {};
 
 	const getClassID = () => {
-		sql = `SELECT CLASS_ID FROM TBL_QUIZ WHERE ID = '${quizID}';`;
+		sql = `SELECT CLASS_ID, TITLE FROM TBL_QUIZ WHERE ID = '${quizID}';`;
 		mysqlConnection.query(sql, (err, result) => {
 			if (err) {
 				sendRes(-1, res);
@@ -340,7 +341,8 @@ router.get('/results', check, (req, res) => {
 					);
 				} else {
 					classID = result[0]['CLASS_ID'];
-					console.log(classID);
+					data['ID'] = quizID;
+					data['TITLE'] = result[0]['TITLE'];
 					isTeacher();
 				}
 			}
@@ -384,7 +386,8 @@ router.get('/results', check, (req, res) => {
 				for (let row of result) {
 					if (row['MARKS'] === null) row['MARKS'] = 'NA';
 				}
-				sendRes(1, res, result);
+				data['RESULTS'] = result;
+				sendRes(1, res, data);
 			}
 		});
 	};
