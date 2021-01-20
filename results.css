@@ -105,7 +105,8 @@ body button:focus {
 	visibility: visible;
 }
 
-.root h1 {
+.root h1,
+.results_tbl h2 {
 	text-align: center;
 	margin: 16px 0;
 }
