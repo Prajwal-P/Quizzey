@@ -26,7 +26,7 @@ connection.connect(err => {
 
 function handleConnection() {
 	setInterval(() => {
-		console.log(`>>>>>    Handeling connection    <<<<<\n`);
+		console.log(`>>>>>    Handling connection    <<<<<\n`);
 		connection.query(`SELECT * FROM TBL_USER_AUTH`, (err, result) => {
 			if (err) {
 				console.log(`Invaild query\nConnection can get terminated\n`);

@@ -38,7 +38,7 @@ function quiz_card_template(cl, i) {
 	];
 	if (classroom.CLASS_CODE) {
 		id1 = `<span class="material-icons delete_btn" onclick="toggle_modal_3(${cl.ID} ,${i})">delete</span>`;
-		id2 = 'Open Quiz';
+		id2 = 'Results';
 		id3 =
 			'Start Time: ' +
 			cl.START_TIME.getDate() +
@@ -63,6 +63,7 @@ function quiz_card_template(cl, i) {
 				/([\d]+:[\d]{2})(:[\d]{2})(.*)/,
 				'$1$3'
 			);
+		id5 = `onclick="toResults(${cl.ID})"`;
 	} else {
 		id1 = `MAX MARKS : ${cl.MAX_MARKS}`;
 		id2 = 'Take Quiz';
@@ -184,7 +185,7 @@ function quiz_card_template(cl, i) {
 }
 
 const fillStudentTable = () => {
-	if (students.length === 0) stu_table = '<h1>No Students in this Class</h1>';
+	if (students.length === 0) stu_table = '<h1>NO STUDENTS IN THIS CLASS</h1>';
 	else {
 		stu_table =
 			'<h1>STUDENTS</h1><table><tr><th>FIRST NAME</th><th>LAST NAME</th><th>EMAIL</th><th></th></tr>';
@@ -204,6 +205,69 @@ const fillStudentTable = () => {
 };
 
 window.onload = () => {
+	const getData = () => {
+		let requestOptions = {
+			method: 'GET',
+			mode: 'cors',
+			credentials: 'include'
+		};
+
+		fetch(`${baseURL}/classroom/${classID}`, requestOptions)
+			.then(result => result.json())
+			.then(res => {
+				if (res.STATUS === 1) {
+					classroom = res.DATA;
+
+					document.querySelector('.class_card').innerHTML = `
+					<div class="class_room">
+						<div class="cls_title_and_teacher_name">
+							<h2>${classroom.TITLE}</h2>
+							<p>${classroom.FULL_NAME}</p>
+						</div>
+						<p>${classroom.DESCRIPTION}</p>
+					</div>
+				`;
+
+					let options_card = document.querySelector('.options_card');
+					if (classroom.CLASS_CODE) {
+						options_card.style.display = 'block';
+						document.getElementById('classCode').innerHTML =
+							classroom.CLASS_CODE;
+
+						fetch(
+							`${baseURL}/student/allstudents/${classID}`,
+							requestOptions
+						)
+							.then(result => result.json())
+							.then(res => {
+								if (res.STATUS === 1) {
+									students = res.DATA;
+									fillStudentTable();
+								} else {
+									alert(res.MESSAGE);
+									window.location = 'dashboard.html';
+								}
+							})
+							.catch(error => console.log('error', error));
+					}
+
+					quiz_card_wrapper = document.querySelector(
+						'.quiz_card_wrapper'
+					);
+					if (classroom.QUIZZES.length === 0) {
+						quiz_card_wrapper.innerHTML = `<h1>NO QUIZZES IN THIS CLASS</h1>`;
+					} else {
+						quiz_card_wrapper.innerHTML = `
+				${classroom.QUIZZES.map(quiz_card_template).join('')}`;
+					}
+				} else {
+					// alert(res.MESSAGE);
+					window.location = 'dashboard.html';
+				}
+			})
+			.catch(error => console.log('error', error));
+	};
+
 	let requestOptions = {
 		method: 'GET',
 		mode: 'cors',
@@ -214,11 +278,12 @@ window.onload = () => {
 		.then(result => result.json())
 		.then(res => {
 			// console.log(res);
-			if (res.STATUS === 1)
+			if (res.STATUS === 1) {
 				document.getElementById(
 					'name'
 				).innerHTML = sessionStorage.getItem('name');
-			else window.location = 'signIn.html';
+				getData();
+			} else window.location = 'signIn.html';
 		})
 		.catch(error => console.log('error', error));
 
@@ -228,61 +293,6 @@ window.onload = () => {
 		.map(ele => ele.split('='))[0][1];
 
 	// console.log(classID);
-
-	fetch(`${baseURL}/classroom/${classID}`, requestOptions)
-		.then(result => result.json())
-		.then(res => {
-			if (res.STATUS === 1) {
-				classroom = res.DATA;
-
-				document.querySelector('.class_card').innerHTML = `
-					<div class="class_room">
-						<div class="cls_title_and_teacher_name">
-							<h2>${classroom.TITLE}</h2>
-							<p>${classroom.FULL_NAME}</p>
-						</div>
-						<p>${classroom.DESCRIPTION}</p>
-					</div>
-				`;
-
-				let options_card = document.querySelector('.options_card');
-				if (classroom.CLASS_CODE) {
-					options_card.style.display = 'block';
-					document.getElementById('classCode').innerHTML =
-						classroom.CLASS_CODE;
-
-					fetch(
-						`${baseURL}/student/allstudents/${classID}`,
-						requestOptions
-					)
-						.then(result => result.json())
-						.then(res => {
-							if (res.STATUS === 1) {
-								students = res.DATA;
-								fillStudentTable();
-							} else {
-								alert(res.MESSAGE);
-								window.location = 'dashboard.html';
-							}
-						})
-						.catch(error => console.log('error', error));
-				}
-
-				quiz_card_wrapper = document.querySelector(
-					'.quiz_card_wrapper'
-				);
-				if (classroom.QUIZZES.length === 0) {
-					quiz_card_wrapper.innerHTML = `<h1>NO QUIZZES IN THIS CLASS</h1>`;
-				} else {
-					quiz_card_wrapper.innerHTML = `
-				${classroom.QUIZZES.map(quiz_card_template).join('')}`;
-				}
-			} else {
-				alert(res.MESSAGE);
-				window.location = 'dashboard.html';
-			}
-		})
-		.catch(error => console.log('error', error));
 
 	page_toggle_btn = document.getElementById('page_toggle_btn');
 };
@@ -374,9 +384,13 @@ const toggle_contents = () => {
 			'<span class="material-icons">assignment</span> Quizzes';
 		page = 2;
 	} else {
-		quiz_card_wrapper.innerHTML = `${classroom.QUIZZES.map(
-			quiz_card_template
-		).join('')}`;
+		if (classroom.QUIZZES.length === 0) {
+			quiz_card_wrapper.innerHTML = `<h1>NO QUIZZES IN THIS CLASS</h1>`;
+		} else {
+			quiz_card_wrapper.innerHTML = `${classroom.QUIZZES.map(
+				quiz_card_template
+			).join('')}`;
+		}
 		page_toggle_btn.innerHTML =
 			'<span class="material-icons">people</span> Students';
 		page = 1;
@@ -477,4 +491,8 @@ const deleteStudent = () => {
 
 const toAddQuiz = () => {
 	window.location = `addquiz.html?classID=${classID}`;
+};
+
+const toResults = id => {
+	window.location = `results.html?quizID=${id}`;
 };

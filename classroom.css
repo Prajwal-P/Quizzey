@@ -304,10 +304,7 @@ th {
 
 .btn_sec {
 	background-color: #66bb6a !important;
-}
-
-.btn_sec:hover {
-	background-color: #388e3c !important;
+	cursor: default !important;
 }
 
 .btn_ter {
